@@ -1,3 +1,4 @@
+import time
 from settings.tokens import TOKENS
 from tools.ethtoken import Token
 from tools.report import report
@@ -16,4 +17,6 @@ def get_profit_tokens_and_report():
             pass
 
 if __name__ == "__main__":
-    get_profit_tokens_and_report()
+    while True:
+        get_profit_tokens_and_report()
+        time.sleep(100)

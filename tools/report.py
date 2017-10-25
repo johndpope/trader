@@ -4,7 +4,7 @@ from bot.telegram import telegram_bot
 """
 def report(item):
     text = "Token:{token}\nProfit:{profit}\nBids:price:{bprice} exchange:{bexchange}\nAsks:price:{aprice} exchange:{aexchange}".format(
-        token = item["token"], profit = item["profit"], bprice = item["bids"]["price"], bexchange = item["bids"]["exchange"],
+        token = item["token"], profit = "{0:.2f}".format(float(item["profit"])), bprice = item["bids"]["price"], bexchange = item["bids"]["exchange"],
         aprice = item["asks"]["price"], aexchange = item["asks"]["exchange"]
         )
     telegram_bot.sendmsg(-1001121650710,text)
