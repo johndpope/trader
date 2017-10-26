@@ -12,7 +12,7 @@ def get_profit_tokens_and_report():
             t.get_token_order_info(["liqui","hitbtc"])
             item = t.summary()
             print item
-            if item["profit"] > 1:
+            if item["profit"] > 2:
                 report_with_depth(item)
         except Exception as e:
             print str(e)
