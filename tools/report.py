@@ -12,7 +12,7 @@ def report(item):
 def report_with_depth(item):
     depth = item["depth"]
     depth_text = "___________________________"
-    for i in depth[0:3]:
+    for i in depth[0:6]:
         depth_text += "\nProfit:" + str(i["profit"]) + "  Depth:" + str(i["depth"]) + "  Ask_eth:" + str(i["ask_eth"]) + " Bid_eth:" + str(i["bid_eth"])
     depth_text += "\n__________________________"
     text = "Token:{token}\nProfit:{profit}%\nBids:price:{bprice} exchange:{bexchange}\nAsks:price:{aprice} exchange:{aexchange}\n{depth}".format(
