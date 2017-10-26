@@ -1,7 +1,7 @@
 import time
 from settings.tokens import TOKENS
 from tools.ethtoken import Token
-from tools.report import report
+from tools.report import report,report_with_depth
 
 def get_profit_tokens_and_report():
     tokens = TOKENS
@@ -11,9 +11,11 @@ def get_profit_tokens_and_report():
             t = Token(token)
             t.get_token_order_info(["liqui","hitbtc"])
             item = t.summary()
+            print item
             if item["profit"] > 1:
                 report_with_depth(item)
-        except:
+        except Exception as e:
+            print str(e)
             pass
 
 if __name__ == "__main__":
