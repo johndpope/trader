@@ -1,6 +1,7 @@
 # -*- coding=utf-8 -*-
 from libs.utils import create_exchange
 from settings.tokens import TOKENS
+from depth.depth import token_depth
 
 class Tokens(object):
     @staticmethod
@@ -33,6 +34,8 @@ class Token(object):
             self.token_orders[i] = token_orders
             # print self.token_orders
 
+    def _get_order_by_exchange_and_type(self, exchange, order_type):
+        return filter(lambda x:x.type == order_type, self.token_orders[exchange].orderitems)
     def get_lowest_asks_price(self):
         """最低买入价"""
         prices = []
@@ -69,6 +72,11 @@ class Token(object):
         item["asks"] = self.get_lowest_asks_price()
         # print self.get_lowest_bid_price(),self.get_highist_ask_price()
         item["profit"] = (self.get_highist_bids_price()["price"]- self.get_lowest_asks_price()["price"])/self.get_highist_bids_price()["price"]*100
+        ask_exchange = item["asks"]["exchange"]
+        bid_exchange = item["bids"]["exchange"]
+        asks = self._get_order_by_exchange_and_type(ask_exchange,"asks")
+        bids = self._get_order_by_exchange_and_type(bid_exchange,"bids")
+        item["depth"] = token_depth.parse_depth(asks, bids)
         return item
 if __name__ == "__main__":
     # tokens = Tokens.get_common_tokens("liqui","hitbtc")
