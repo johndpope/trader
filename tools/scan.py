@@ -12,7 +12,7 @@ def get_profit_tokens_and_report():
             t.get_token_order_info(["liqui","hitbtc"])
             item = t.summary()
             if item["profit"] > 1:
-                report(item)
+                report_with_depth(item)
         except:
             pass
 
