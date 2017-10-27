@@ -27,6 +27,9 @@ class Orders(object):
 
     @staticmethod
     def get_highist_bids_price(orderitems):
+        # print orderitems
         orderitems = filter(lambda x:x.type == "bids", orderitems)
+        # print orderitems
         seq = [x.price for x in orderitems ]
+        # print "seq,",seq
         return max(seq)

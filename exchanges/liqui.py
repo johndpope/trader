@@ -30,3 +30,6 @@ class Liqui(Exchange):
 
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
+if __name__ == "__main__":
+    b = Liqui()
+    print b.get_symbols()

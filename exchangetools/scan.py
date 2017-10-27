@@ -16,11 +16,17 @@ def get_profit_tokens_and_report():
                 exchanges.append("liqui")
             if token in BITTREX_TOKENS:
                 exchanges.append("bittrex")
+            # print token
+            if len(exchanges) <2:
+                continue
             t = Token(token)
             t.get_token_order_info(exchanges)
             item = t.summary()
-            print item
-            if item["profit"] > 2:
+            # print item
+            print token, exchanges
+            if item["profit"] > 1:
+                print "__________import__________"
+                # print item
                 report_with_depth(item)
         except Exception as e:
             print str(e)
@@ -29,4 +35,5 @@ def get_profit_tokens_and_report():
 if __name__ == "__main__":
     while True:
         get_profit_tokens_and_report()
+        print "-------------sleep---------------"
         time.sleep(100)

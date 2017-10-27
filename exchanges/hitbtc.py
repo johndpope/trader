@@ -56,4 +56,5 @@ class Hitbtc(Exchange):
 
 if __name__ == "__main__":
     h = Hitbtc()
-    h.order("ETH")
+    # h.order("ETH")
+    print h.get_symbols()
