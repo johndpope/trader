@@ -5,3 +5,6 @@ def create_exchange(exchange):
     if exchange == "hitbtc":
         from exchanges.hitbtc import Hitbtc
         return Hitbtc()
+    if exchange == "bittrex":
+        from exchanges.bittrex import Bittrex
+        return Bittrex()

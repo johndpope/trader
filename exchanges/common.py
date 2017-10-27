@@ -16,10 +16,11 @@ class Exchange(object):
                 print e.response
         else:
             try:
-            client = tornado.httpclient.HTTPClient()
-            response = client.fetch(url,method="POST",headers=headers,body=data)
-        except tornado.httpclient.HTTPError as e:
-            print e.response
+                client = tornado.httpclient.HTTPClient()
+                response = client.fetch(url,method="POST",headers=headers,body=data)
+                return response
+            except tornado.httpclient.HTTPError as e:
+                print e.response
 
     @classmethod
     def _fetch(cls, url):
