@@ -6,12 +6,26 @@ import models
 
 class Exchange(object):
     @staticmethod
-    def _sync_fetch(url):
+    def _sync_fetch(url,method="GET",headers=None,data=None):
         httpclient = tornado.httpclient.HTTPClient()
-        response = httpclient.fetch(url)
-        return response.body
+        if method == "GET":
+            try:
+                response = httpclient.fetch(url)
+                return response.body
+            except tornado.httpclient.HTTPError as e:
+                print e.response
+        else:
+            try:
+            client = tornado.httpclient.HTTPClient()
+            response = client.fetch(url,method="POST",headers=headers,body=data)
+        except tornado.httpclient.HTTPError as e:
+            print e.response
 
     @classmethod
     def _fetch(cls, url):
         # print url
         return cls._sync_fetch(url)
+
+    @classmethod
+    def post(cls, url, data=None, headers=None):
+        return cls._sync_fetch(url,method="POST",headers=headers, data=data)
