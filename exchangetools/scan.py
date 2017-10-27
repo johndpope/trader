@@ -24,7 +24,7 @@ def get_profit_tokens_and_report():
             item = t.summary()
             # print item
             print token, exchanges
-            if item["profit"] > 1:
+            if item["profit"] > 2:
                 print "__________import__________"
                 # print item
                 report_with_depth(item)
