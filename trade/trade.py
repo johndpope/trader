@@ -9,9 +9,15 @@ class Trade(object):
         pass
     @classmethod
     def order(cls,pairs):
-        profit = pairs["profit"]
-        ask = pairs["ask"]
-        bid = pairs["bid"]
+        print 111
+        depth = pairs["depth"]
+        pair = pairs[0]
+        print 222
+        profit = pair["profit"]
+        print 333
+        ask = pair["ask"]
+        bid = pair["bid"]
+        print "ask,bid",ask
         cls.arrange_order(ask, bid)
 
         # bid_queue = token_item["depth"]

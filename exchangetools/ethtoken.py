@@ -89,6 +89,7 @@ class Token(object):
         bids = self._get_order_by_exchange_and_type(bid_exchange,"bids")
         # print 4
         item["depth"] = token_depth.parse_depth(asks, bids)
+        item["auto_order"] = token_depth.parse_auto_order(asks, bids)
         return item
 
     def get_auto_order_items(self):
