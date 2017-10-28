@@ -43,8 +43,8 @@ class Hitbtc(Exchange):
 
     def order(self,symbol, side, price,quantity):
         """/api/1/trading/new_order"""
-        # key = HITBTC["key"]
-        # secret = HITBTC["secret"]
+        key = HITBTC["key"]
+        secret = HITBTC["secret"]
         # nonce = str(int(time.mktime(datetime.datetime.now().timetuple()) * 1000 + datetime.datetime.now().microsecond / 1000))
         # clientOrderId = "".join(random.choice(string.digits + string.ascii_lowercase) for _ in range(30))
         # path = "/api/1/trading/new_order?apikey=" + key + "&nonce=" + nonce
