@@ -10,7 +10,7 @@ class Exchange(object):
         httpclient = tornado.httpclient.HTTPClient()
         if method == "GET":
             try:
-                response = httpclient.fetch(url)
+                response = httpclient.fetch(url, headers= headers)
                 return response.body
             except tornado.httpclient.HTTPError as e:
                 print e.response
@@ -24,9 +24,9 @@ class Exchange(object):
                 print e.response
 
     @classmethod
-    def _fetch(cls, url):
+    def _fetch(cls, url, headers=None):
         # print url
-        return cls._sync_fetch(url)
+        return cls._sync_fetch(url, headers=headers)
 
     @classmethod
     def post(cls, url, data=None, headers=None):

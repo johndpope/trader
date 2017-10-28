@@ -15,6 +15,8 @@ from settings.account import HITBTC
 class Hitbtc(Exchange):
     def __init__(self):
         self._prefix = "https://api.hitbtc.com"
+        self._key = HITBTC["key"]
+        self._secret = HITBTC["secret"]
 
     def get_symbols(self):
         url = self._prefix + '/api/2/public/symbol'
@@ -50,6 +52,12 @@ class Hitbtc(Exchange):
         r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))        
         print(r.json())
         # print result.body
+    def transfer(self, token, amount, trans_type):
+        # key = HITBTC["key"]
+        # secret = 
+        data = {"currency":token, "amount":amount, "type":trans_type}
+        r  = requests.post('https://api.hitbtc.com/api/2/account/transfer', data = data, auth=(self._key, self._secret)) 
+        print r.json()
 
 if __name__ == "__main__":
     h = Hitbtc()
