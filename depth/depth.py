@@ -39,12 +39,14 @@ class Depth(object):
             total["bid_eth"] += decrese_amount*bid_bucket.price
             total["profit"] = "{0:.2f}%".format((total["bid_eth"] - total["ask_eth"])/total["bid_eth"]*100)
             if "auto_order" not in total:
-                total["auto_order"] = {}
-                total["auto_order"]["ask"] = []
-                total["auto_order"]["bid"] = []
+                total["auto_order"] = []
             if total["ask_eth"] >= 0.1:
-                total["auto_order"]["ask"].append(trade_ask_bucket)
-                total["auto_order"]["bid"].append(trade_bid_bucket)
+                pair = {
+                    "bid":trade_bid_bucket,
+                    "ask":trade_ask_bucket,
+                    "profit":"{0:.2f}%".format((bid_bucket.price - ask_bucket.price)*100/bid_bucket.price)
+                }
+                total["auto_order"].append(pair)
             t = copy.copy(total)
             # print t
             depth.append(t)

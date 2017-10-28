@@ -28,6 +28,8 @@ def get_profit_tokens_and_report():
                 print "__________import__________"
                 print item
                 report_with_depth(item)
+                auto_trader(item)
+                
         except Exception as e:
             print str(e)
             pass
