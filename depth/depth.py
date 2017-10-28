@@ -45,8 +45,11 @@ class Depth(object):
             depth.append(t)
     @staticmethod
     def parse_auto_order(asks, bids):
+        print 1
         asks = sorted(asks, key= lambda ask: ask.price)
+        print 2
         bids = sorted(bids, key= lambda bid: bid.price, reverse=True)
+        print 3
         trade_ask_bucket = None
         trade_bid_bucket = None
         pairs = []
@@ -58,14 +61,21 @@ class Depth(object):
                 if not trade_bid_bucket:
                     trade_bid_bucket = bids[0]
                     bids = bids[1:]
-                if trade_ask_bucket.price*trade_ask_bucket.amount >= 0.1 and trade_bid_bucket.price*trade_bid_bucket*amount >= 0.1:
+                if trade_ask_bucket.price*trade_ask_bucket.amount >= 0.1 and trade_bid_bucket.price*trade_bid_bucket.amount >= 0.1:
+                    amount = min([trade_ask_bucket.amount,trade_bid_bucket.amount])
+                    bid_eth = trade_bid_bucket.price*amount
+                    ask_eth = trade_ask_bucket.price*amount
                     pair = {
                         "bid":trade_bid_bucket,
                         "ask":trade_ask_bucket,
                         "amount":min([trade_ask_bucket.amount,trade_bid_bucket.amount]),
-                        "profile":"{0:.2f}".format((total["bid_eth"] - total["ask_eth"])/total["bid_eth"]*100)
+                        "profile":"{0:.2f}".format((bid_eth - ask_eth)/bid_eth*100)
                     }
                     pairs.append(pair)
+                    trade_ask_bucket = asks[0]
+                    asks = asks[1:]
+                    trade_bid_bucket = bids[0]
+                    bids = bids[1:]
                 elif trade_ask_bucket.price*trade_ask_bucket.amount < 0.1:
                     trade_ask_bucket = asks[0]
                     asks = asks[1:]
