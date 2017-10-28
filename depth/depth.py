@@ -63,8 +63,8 @@ class Depth(object):
                     bids = bids[1:]
                 if trade_ask_bucket.price*trade_ask_bucket.amount >= 0.1 and trade_bid_bucket.price*trade_bid_bucket.amount >= 0.1:
                     amount = min([trade_ask_bucket.amount,trade_bid_bucket.amount])
-                    bid_eth = trade_bid_bucket.price*amount
-                    ask_eth = trade_ask_bucket.price*amount
+                    ask_eth = trade_bid_bucket.price*amount
+                    bid_eth = trade_ask_bucket.price*amount
                     print trade_ask_bucket.price
                     print trade_bid_bucket.price
                     pair = {
