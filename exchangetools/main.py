@@ -2,6 +2,7 @@ import time
 from settings.tokens import HITBTC_TOKENS, LIQUI_TOKENS, BITTREX_TOKENS
 from exchangetools.ethtoken import Token
 from exchangetools.report import report,report_with_depth
+from trade.trade import auto_trader
 
 def get_profit_tokens_and_report():
     # tokens = TOKENS
@@ -28,8 +29,8 @@ def get_profit_tokens_and_report():
                 print "__________import__________"
                 print item
                 report_with_depth(item)
-                auto_trader(item)
-                
+                auto_trader.order(item)
+
         except Exception as e:
             print str(e)
             pass
