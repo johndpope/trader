@@ -46,6 +46,6 @@ class Depth(object):
                 total["auto_order"]["ask"].append(trade_ask_bucket)
                 total["auto_order"]["bid"].append(trade_bid_bucket)
             t = copy.copy(total)
-            print t
+            # print t
             depth.append(t)
 token_depth = Depth()
