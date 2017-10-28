@@ -76,18 +76,18 @@ class Token(object):
     def summary(self):
         item = {}
         item["token"] = self.token
-        print 1
+        # print 1
         item["bids"] = self.get_highist_bids_price()
         item["asks"] = self.get_lowest_asks_price()
-        print 2
+        # print 2
         # print self.get_lowest_bid_price(),self.get_highist_ask_price()
         item["profit"] = (self.get_highist_bids_price()["price"]- self.get_lowest_asks_price()["price"])/self.get_highist_bids_price()["price"]*100
         ask_exchange = item["asks"]["exchange"]
         bid_exchange = item["bids"]["exchange"]
-        print 3
+        # print 3
         asks = self._get_order_by_exchange_and_type(ask_exchange,"asks")
         bids = self._get_order_by_exchange_and_type(bid_exchange,"bids")
-        print 4
+        # print 4
         item["depth"] = token_depth.parse_depth(asks, bids)
         return item
 
