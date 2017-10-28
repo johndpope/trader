@@ -44,7 +44,7 @@ class Depth(object):
                 pair = {
                     "bid":trade_bid_bucket,
                     "ask":trade_ask_bucket,
-                    "profit":"{0:.2f}%".format((bid_bucket.price - ask_bucket.price)*100/bid_bucket.price)
+                    "profit":"{0:.2f}".format((bid_bucket.price - ask_bucket.price)*100/bid_bucket.price)
                 }
                 total["auto_order"].append(pair)
             t = copy.copy(total)

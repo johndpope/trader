@@ -1,6 +1,7 @@
 class Trade(object):
     def arrange_order(ask, bid):
         print ask, bid
+        print "eeeeee"
         # bid_exchange = create_exchange(ask.exchange)
         # ask_exchange = create_exchange(bid.exchange)
         # bid_exchange.order(ask.token,"sell" ask.amount, ask.price)
