@@ -4,6 +4,7 @@ class OrderItem(object):
         self.type = item["type"]
         self.price = float(item["price"])
         self.amount = float(item["amount"])
+        self.exchange = item["exchange"]
 
     def worth(self):
         return self.price*self.amount

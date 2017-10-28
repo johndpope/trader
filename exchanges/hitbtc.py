@@ -36,7 +36,8 @@ class Hitbtc(Exchange):
                 i = {
                     "type":_type,
                     "price":item[0],
-                    "amount":item[1]
+                    "amount":item[1],
+                    "exchange":"hitbtc"
                 }
                 new_orders.append(i)
         # print new_orders

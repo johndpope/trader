@@ -34,7 +34,8 @@ class Bittrex(Exchange):
                 i = {
                     "type":TYPE[_type],
                     "price":item["Rate"],
-                    "amount":item["Quantity"]
+                    "amount":item["Quantity"],
+                    "exchange":"bittrex"
                 }
                 new_orders.append(i)
 

@@ -24,7 +24,8 @@ class Liqui(Exchange):
                 i = {
                     "type":_type,
                     "price":item[0],
-                    "amount":item[1]
+                    "amount":item[1],
+                    "exchange":"liqui"
                 }
                 new_orders.append(i)
 

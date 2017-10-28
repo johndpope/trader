@@ -90,6 +90,9 @@ class Token(object):
         print 4
         item["depth"] = token_depth.parse_depth(asks, bids)
         return item
+
+    def get_auto_order_items(self):
+        pass
 if __name__ == "__main__":
     # tokens = Tokens.get_common_tokens("liqui","hitbtc")
     tokens = TOKENS

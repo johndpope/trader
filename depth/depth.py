@@ -28,12 +28,19 @@ class Depth(object):
             if ask_bucket.price >= bid_bucket.price:
                 return depth
             decrese_amount = min(bid_bucket.amount, ask_bucket.amount)
+            trade_ask_bucket = copy.copy(ask_bucket)
+            trade_bid_bucket = copy.copy(bid_bucket)
+            trade_ask_bucket.amount = decrese_amount
+            trade_bid_bucket.amount = decrese_amount
             bid_bucket.amount -= decrese_amount
             ask_bucket.amount -= decrese_amount
             total["depth"] += decrese_amount
             total["ask_eth"] += decrese_amount*ask_bucket.price
             total["bid_eth"] += decrese_amount*bid_bucket.price
             total["profit"] = "{0:.2f}%".format((total["bid_eth"] - total["ask_eth"])/total["bid_eth"]*100)
+            if total["ask_eth"] >= 0.1:
+                total["auto_order"]["ask"].append(trade_ask_bucket)
+                total["auto_order"]["bid"].append(trade_bid_bucket)
             t = copy.copy(total)
             depth.append(t)
 token_depth = Depth()
