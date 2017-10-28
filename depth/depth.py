@@ -65,8 +65,8 @@ class Depth(object):
                     amount = min([trade_ask_bucket.amount,trade_bid_bucket.amount])
                     ask_eth = trade_bid_bucket.price*amount
                     bid_eth = trade_ask_bucket.price*amount
-                    print trade_ask_bucket.price
-                    print trade_bid_bucket.price
+                    # print trade_ask_bucket.price
+                    # print trade_bid_bucket.price
                     pair = {
                         "bid":trade_bid_bucket,
                         "ask":trade_ask_bucket,
@@ -74,10 +74,12 @@ class Depth(object):
                         "profile":"{0:.2f}".format((bid_eth - ask_eth)/bid_eth*100)
                     }
                     pairs.append(pair)
-                    trade_ask_bucket = asks[0]
-                    asks = asks[1:]
-                    trade_bid_bucket = bids[0]
-                    bids = bids[1:]
+                    if amount == trade_ask_bucket.amount:
+                        trade_ask_bucket = asks[0]
+                        asks = asks[1:]
+                    else:
+                        trade_bid_bucket = bids[0]
+                        bids = bids[1:]
                 elif trade_ask_bucket.price*trade_ask_bucket.amount < 0.1:
                     trade_ask_bucket = asks[0]
                     asks = asks[1:]
