@@ -5,6 +5,7 @@ import hmac
 import random
 import string
 import time
+import requests
 
 import tornado.gen
 import models
@@ -45,16 +46,7 @@ class Hitbtc(Exchange):
         """/api/1/trading/new_order"""
         key = HITBTC["key"]
         secret = HITBTC["secret"]
-        # nonce = str(int(time.mktime(datetime.datetime.now().timetuple()) * 1000 + datetime.datetime.now().microsecond / 1000))
-        # clientOrderId = "".join(random.choice(string.digits + string.ascii_lowercase) for _ in range(30))
-        # path = "/api/1/trading/new_order?apikey=" + key + "&nonce=" + nonce
-        # newOrder = "clientOrderId=" + clientOrderId + "&symbol={symbol}&side={side}&price={price}&quantity={quantity}&type=limit".format(symbol=symbol,side=side,price=price,quantity=quantity)
-        # signature = hmac.new(secret, path + newOrder, hashlib.sha512).hexdigest()
-        # result = self.post("http://api.hitbtc.com" + path, headers={"Api-Signature": signature}, data=newOrder)
-        # print result.body['ExecutionReport']
-        import requests
-
-        orderData = {'symbol':'snceth', 'side': 'buy', 'quantity': '0.005', 'price': '0.00012' }
+        orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
         r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))        
         print(r.json())
         # print result.body
