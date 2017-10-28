@@ -1,5 +1,7 @@
 import copy
+import traceback
 from models.order import OrderItem
+
 
 class Depth(object):
 
@@ -71,6 +73,7 @@ class Depth(object):
                     trade_bid_bucket = bids[0]
                     bids = bids[1:]
             except:
+                traceback.print_exc()
                 return pairs
 
 token_depth = Depth()
