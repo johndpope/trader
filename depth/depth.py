@@ -65,6 +65,8 @@ class Depth(object):
                     amount = min([trade_ask_bucket.amount,trade_bid_bucket.amount])
                     bid_eth = trade_bid_bucket.price*amount
                     ask_eth = trade_ask_bucket.price*amount
+                    print trade_ask_bucket.price
+                    print trade_bid_bucket.price
                     pair = {
                         "bid":trade_bid_bucket,
                         "ask":trade_ask_bucket,
