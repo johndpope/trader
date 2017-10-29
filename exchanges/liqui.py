@@ -1,10 +1,21 @@
 import json
 import models
+import hmac
+import hashlib
+import requests
 from exchanges.common import Exchange
+from settings.account import LIQUI
 
 class Liqui(Exchange):
     def __init__(self):
         self._prefix = "https://api.liqui.io/api/3"
+        self._secret = LIQUI["secret"]
+        self._key = LIQUI["key"]
+
+    def _sign(self, data):
+        if isinstance(data, dict):
+            data = urlencode(data)
+        return hmac.new(self._secret.encode(), data.encode(), hashlib.sha512).hexdigest()
 
     def get_symbols(self):
         url = self._prefix  + "/info"
@@ -31,6 +42,31 @@ class Liqui(Exchange):
 
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
+
+    def order(self,token, side, price,quantity):
+        """/api/1/trading/new_order"""
+        # key = HITBTC["key"]
+        # secret = HITBTC["secret"]
+        # orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
+        # print orderData
+        # https://api.liqui.io/api/3/<method name>/<pair listing>
+        pair = token + "_" + eth
+        params = {
+            "method":'Trade', 
+            "pair":pair, 
+            "type":side, 
+            "rate":rate,
+            "amount":quantity
+            }
+        params.update(nonce=int(time()))
+        headers = {'Key': self._key, 'Sign': self._sign(params)}
+        resp = requests.post('https://api.liqui.io', data=params, headers=headers)
+        data = resp.json()
+        if 'error' in data:
+            # raise LiquiApiError(data['error'])
+            print data["error"]
+        return data.get('return', data)
 if __name__ == "__main__":
     b = Liqui()
     print b.get_symbols()
+    b.order("knc","buy","0.002",1)
