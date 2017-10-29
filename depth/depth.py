@@ -7,8 +7,8 @@ class Depth(object):
 
     @staticmethod
     def parse_depth(asks, bids):
-        asks = copy.copy(asks)
-        bids = bids.copy(bids)
+        # asks = copy.copy(asks)
+        # bids = bids.copy(bids)
         asks = sorted(asks, key= lambda ask: ask.price)
         bids = sorted(bids, key= lambda bid: bid.price, reverse=True)
         bid_bucket = None
@@ -22,10 +22,10 @@ class Depth(object):
         while True:
             try:
                 if not ask_bucket or ask_bucket.amount == 0:
-                    ask_bucket = asks[0]
+                    ask_bucket = copy.copy(asks[0])
                     asks = asks[1:]
                 if not bid_bucket or bid_bucket.amount == 0:
-                    bid_bucket = bids[0]
+                    bid_bucket = copy.copy(bids[0])
                     bids = bids[1:]
             except:
                 return depth
@@ -49,8 +49,8 @@ class Depth(object):
             depth.append(t)
     @staticmethod
     def parse_auto_order(asks, bids):
-        asks = copy.copy(asks)
-        bids = bids.copy(bids)
+        # asks = copy.copy(asks)
+        # bids = bids.copy(bids)
         print 1
         asks = sorted(asks, key= lambda ask: ask.price)
         print 2
@@ -62,10 +62,10 @@ class Depth(object):
         while True:
             try:
                 if not trade_ask_bucket:
-                    trade_ask_bucket = asks[0]
+                    trade_ask_bucket = copy.copy(asks[0])
                     asks = asks[1:]
                 if not trade_bid_bucket:
-                    trade_bid_bucket = bids[0]
+                    trade_bid_bucket = copy.copy(bids[0])
                     bids = bids[1:]
                 print "in auto order..."
                 print trade_ask_bucket.price,trade_bid_bucket.price,trade_ask_bucket.amount, trade_bid_bucket.amount
@@ -84,16 +84,16 @@ class Depth(object):
                     }
                     pairs.append(pair)
                     if amount == trade_ask_bucket.amount:
-                        trade_ask_bucket = asks[0]
+                        trade_ask_bucket = copy.copy(asks[0])
                         asks = asks[1:]
                     else:
-                        trade_bid_bucket = bids[0]
+                        trade_bid_bucket = copy.copy(bids[0])
                         bids = bids[1:]
                 elif trade_ask_bucket.price*trade_ask_bucket.amount < 0.1:
-                    trade_ask_bucket = asks[0]
+                    trade_ask_bucket = copy.copy(asks[0])
                     asks = asks[1:]
                 elif trade_bid_bucket.price*trade_bid_bucket.amount < 0.1:
-                    trade_bid_bucket = bids[0]
+                    trade_bid_bucket = copy.copy(bids[0])
                     bids = bids[1:]
             except:
                 traceback.print_exc()
