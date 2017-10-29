@@ -45,13 +45,15 @@ class Hitbtc(Exchange):
         # print token_orders
         return token_orders
 
-    def order(self,symbol, side, price,quantity):
+    def order(self,token, side, price,quantity):
         """/api/1/trading/new_order"""
+        symbol = token + "eth"
+        symbol = symbol.upper()
         key = HITBTC["key"]
         secret = HITBTC["secret"]
         orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
-        # r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))        
-        # print(r.json())
+        r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))        
+        print(r.json())
         # print result.body
     def transfer(self, token, amount, trans_type):
         # key = HITBTC["key"]
@@ -62,5 +64,5 @@ class Hitbtc(Exchange):
 
 if __name__ == "__main__":
     h = Hitbtc()
-    h.order("SNCETH","buy",'0.00012','0.3')
+    # h.order("SNCETH","buy",'0.00012','0.3')
     #print h.get_symbols()

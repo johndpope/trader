@@ -2,9 +2,15 @@ import json
 import models
 import hmac
 import hashlib
+import time
 import requests
 from exchanges.common import Exchange
 from settings.account import LIQUI
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    from urllib import urlencode
+
 
 class Liqui(Exchange):
     def __init__(self):
@@ -50,17 +56,18 @@ class Liqui(Exchange):
         # orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
         # print orderData
         # https://api.liqui.io/api/3/<method name>/<pair listing>
-        pair = token + "_" + eth
+        pair = token + "_" + "eth"
         params = {
             "method":'Trade', 
             "pair":pair, 
             "type":side, 
-            "rate":rate,
+            "rate":price,
             "amount":quantity
             }
-        params.update(nonce=int(time()))
+        params.update(nonce=int(time.time()))
         headers = {'Key': self._key, 'Sign': self._sign(params)}
-        resp = requests.post('https://api.liqui.io', data=params, headers=headers)
+        resp = requests.post('https://api.liqui.io/tapi', data=params, headers=headers)
+        print resp
         data = resp.json()
         if 'error' in data:
             # raise LiquiApiError(data['error'])
@@ -69,4 +76,4 @@ class Liqui(Exchange):
 if __name__ == "__main__":
     b = Liqui()
     print b.get_symbols()
-    b.order("knc","buy","0.002",1)
+    print b.order("knc","buy","0.002",1)

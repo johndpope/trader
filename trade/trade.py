@@ -7,8 +7,10 @@ class Trade(object):
         bid_exchange = create_exchange(ask.exchange)
         ask_exchange = create_exchange(bid.exchange)
         # symbol, side, price,quantity
-        bid_exchange.order(token,"buy", ask.price, amount)
-        ask_exchange.order(token,"sell", bid.price, amount)
+        print ask.exchange, token, "buy", ask.price, amount
+        print bid.exchange, token,"sell", bid.price, amount
+        # bid_exchange.order(token,"buy", ask.price, amount)
+        # ask_exchange.order(token,"sell", bid.price, amount)
         # pass
     @classmethod
     def order(cls,token,pairs):
