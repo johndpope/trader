@@ -66,6 +66,7 @@ class Liqui(Exchange):
             }
         params.update(nonce=int(time.time()))
         headers = {'Key': self._key, 'Sign': self._sign(params)}
+        print "liqui",params
         resp = requests.post('https://api.liqui.io/tapi', data=params, headers=headers)
         print resp
         data = resp.json()
