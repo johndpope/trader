@@ -71,7 +71,7 @@ class Depth(object):
                         "bid":trade_bid_bucket,
                         "ask":trade_ask_bucket,
                         "amount":min([trade_ask_bucket.amount,trade_bid_bucket.amount]),
-                        "profile":"{0:.2f}".format((bid_eth - ask_eth)/bid_eth*100)
+                        "profite":"{0:.2f}".format((bid_eth - ask_eth)/bid_eth*100)
                     }
                     pairs.append(pair)
                     if amount == trade_ask_bucket.amount:

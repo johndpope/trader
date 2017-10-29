@@ -10,7 +10,8 @@ class Trade(object):
     @classmethod
     def order(cls,pairs):
         print 111
-        depth = pairs["depth"]
+        print pairs
+        # depth = pairs["depth"]
         pair = pairs[0]
         print 222
         profit = pair["profit"]
