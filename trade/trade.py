@@ -1,17 +1,17 @@
 from libs.utils import create_exchange
 class Trade(object):
     @staticmethod
-    def arrange_order(ask, bid, amount):
+    def arrange_order(token,ask, bid, amount):
         # print ask, bid
         # print "eeeeee"
         bid_exchange = create_exchange(ask.exchange)
         ask_exchange = create_exchange(bid.exchange)
         # symbol, side, price,quantity
-        bid_exchange.order(ask.token,"buy", ask.price, amount)
-        ask_exchange.order(bid.token,"sell", bid.price, amount)
+        bid_exchange.order(token,"buy", ask.price, amount)
+        ask_exchange.order(token,"sell", bid.price, amount)
         # pass
     @classmethod
-    def order(cls,pairs):
+    def order(cls,token,pairs):
         for pair in pairs:
             profit = pair["profit"]
             if profit <1:
@@ -20,7 +20,7 @@ class Trade(object):
             bid = pair["bid"]
             amount = pair["amount"]
             # print profit, ask.price,ask.amount, ask.exchange, ask.type, bid.price, bid.amount, bid.exchange,bid.type, amount
-            cls.arrange_order(ask, bid, amount)
+            cls.arrange_order(token,ask, bid, amount)
             break
 
         # bid_queue = token_item["depth"]

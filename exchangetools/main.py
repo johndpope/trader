@@ -31,7 +31,7 @@ def get_profit_tokens_and_report():
                 print "__________import__________"
                 # print item
                 report_with_depth(item)
-                auto_trader.order(item["auto_order"])
+                auto_trader.order(token,item["auto_order"])
 
         except Exception as e:
             print str(e)
