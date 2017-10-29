@@ -1,3 +1,4 @@
+from libs.utils import create_exchange
 class Trade(object):
     @staticmethod
     def arrange_order(ask, bid, amount):
