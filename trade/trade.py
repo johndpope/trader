@@ -9,17 +9,13 @@ class Trade(object):
         pass
     @classmethod
     def order(cls,pairs):
-        print 111
-        print pairs
-        # depth = pairs["depth"]
-        pair = pairs[0]
-        print 222
-        profit = pair["profit"]
-        print 333
-        ask = pair["ask"]
-        bid = pair["bid"]
-        print "ask,bid",ask
-        cls.arrange_order(ask, bid)
+        for pair in pairs:
+            profit = pair["profit"]
+            ask = pair["ask"]
+            bid = pair["bid"]
+            amount = pair["amount"]
+            print profit, ask.price,ask.amount, ask.exchange, ask.type, bid.price, bid.amount, bid.exchange,bid.type, amount
+        #cls.arrange_order(ask, bid)
 
         # bid_queue = token_item["depth"]
 auto_trader = Trade()

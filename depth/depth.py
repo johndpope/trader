@@ -40,6 +40,7 @@ class Depth(object):
             total["ask_eth"] += decrese_amount*ask_bucket.price
             total["bid_eth"] += decrese_amount*bid_bucket.price
             total["profit"] = "{0:.2f}%".format((total["bid_eth"] - total["ask_eth"])/total["bid_eth"]*100)
+            print trade_ask_bucket.price, trade_bid_bucket.price, amount
             t = copy.copy(total)
             # print t
             depth.append(t)
@@ -61,17 +62,19 @@ class Depth(object):
                 if not trade_bid_bucket:
                     trade_bid_bucket = bids[0]
                     bids = bids[1:]
+                print trade_ask_bucket.price*trade_ask_bucket.amount,trade_bid_bucket.price*trade_bid_bucket.amount,trade_ask_bucket.amount, trade_bid_bucket.amount
                 if trade_ask_bucket.price*trade_ask_bucket.amount >= 0.1 and trade_bid_bucket.price*trade_bid_bucket.amount >= 0.1:
                     amount = min([trade_ask_bucket.amount,trade_bid_bucket.amount])
-                    ask_eth = trade_bid_bucket.price*amount
-                    bid_eth = trade_ask_bucket.price*amount
+                    bid_eth = trade_bid_bucket.price*amount
+                    ask_eth = trade_ask_bucket.price*amount
                     # print trade_ask_bucket.price
                     # print trade_bid_bucket.price
+                    print "pass...",bid_eth - ask_eth
                     pair = {
                         "bid":trade_bid_bucket,
                         "ask":trade_ask_bucket,
                         "amount":min([trade_ask_bucket.amount,trade_bid_bucket.amount]),
-                        "profite":"{0:.2f}".format((bid_eth - ask_eth)/bid_eth*100)
+                        "profit":"{0:.2f}".format((bid_eth - ask_eth)/bid_eth*100)
                     }
                     pairs.append(pair)
                     if amount == trade_ask_bucket.amount:
