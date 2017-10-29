@@ -42,13 +42,14 @@ class Bittrex(Exchange):
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
     def order(self,symbol, side, price,quantity):
-        url = "/api/v1.1/market/buylimit?apikey={apikey}&market={market}&quantity={quantity}&rate={price}".format(apikey=apikey, market=market, quantity=quantity,price=price )
-        apisign = hmac.new(self._secret.encode(),
-                              url.encode(),
-                              hashlib.sha512).hexdigest()
-        apikey = ""
-        result = self.post("http://api.hitbtc.com" + path, headers={"Api-Signature": signature}, data=newOrder)
-        print result
+        print "eee"
+        # url = "/api/v1.1/market/buylimit?apikey={apikey}&market={market}&quantity={quantity}&rate={price}".format(apikey=apikey, market=market, quantity=quantity,price=price )
+        # apisign = hmac.new(self._secret.encode(),
+                              # url.encode(),
+                              # hashlib.sha512).hexdigest()
+        # apikey = ""
+        # result = self.post("http://api.hitbtc.com" + path, headers={"Api-Signature": signature}, data=newOrder)
+        # print result
 
     def get_balance(self):
         url = "https://bittrex.com/api/v1.1/account/getbalance?apikey={key}&currency=BTC&nonce={nonce}".format(key=self._key,nonce = int(time.time()))

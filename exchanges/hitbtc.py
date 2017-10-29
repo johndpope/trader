@@ -50,8 +50,9 @@ class Hitbtc(Exchange):
         key = HITBTC["key"]
         secret = HITBTC["secret"]
         orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
-        r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))        
-        print(r.json())
+        print orderData
+        # r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))        
+        # print(r.json())
         # print result.body
     def transfer(self, token, amount, trans_type):
         # key = HITBTC["key"]
