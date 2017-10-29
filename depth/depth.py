@@ -30,6 +30,7 @@ class Depth(object):
             if ask_bucket.price >= bid_bucket.price:
                 return depth
             decrese_amount = min(bid_bucket.amount, ask_bucket.amount)
+            print ask_bucket.price,ask_bucket.amount bid_bucket.price,bid_bucket.amount, decrese_amount,
             trade_ask_bucket = copy.copy(ask_bucket)
             trade_bid_bucket = copy.copy(bid_bucket)
             trade_ask_bucket.amount = decrese_amount
@@ -40,7 +41,7 @@ class Depth(object):
             total["ask_eth"] += decrese_amount*ask_bucket.price
             total["bid_eth"] += decrese_amount*bid_bucket.price
             total["profit"] = "{0:.2f}%".format((total["bid_eth"] - total["ask_eth"])/total["bid_eth"]*100)
-            print trade_ask_bucket.price, trade_bid_bucket.price, decrese_amount
+            # print trade_ask_bucket.price, trade_bid_bucket.price, decrese_amount
             t = copy.copy(total)
             # print t
             depth.append(t)
