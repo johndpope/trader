@@ -32,7 +32,7 @@ class Depth(object):
             if ask_bucket.price >= bid_bucket.price:
                 return depth
             decrese_amount = min(bid_bucket.amount, ask_bucket.amount)
-            print ask_bucket.price,ask_bucket.amount,bid_bucket.price,bid_bucket.amount, decrese_amount
+            # print ask_bucket.price,ask_bucket.amount,bid_bucket.price,bid_bucket.amount, decrese_amount
             trade_ask_bucket = copy.copy(ask_bucket)
             trade_bid_bucket = copy.copy(bid_bucket)
             trade_ask_bucket.amount = decrese_amount
@@ -51,11 +51,11 @@ class Depth(object):
     def parse_auto_order(asks, bids):
         # asks = copy.copy(asks)
         # bids = bids.copy(bids)
-        print 1
+        # print 1
         asks = sorted(asks, key= lambda ask: ask.price)
-        print 2
+        # print 2
         bids = sorted(bids, key= lambda bid: bid.price, reverse=True)
-        print 3
+        # print 3
         trade_ask_bucket = None
         trade_bid_bucket = None
         pairs = []
@@ -67,15 +67,15 @@ class Depth(object):
                 if not trade_bid_bucket:
                     trade_bid_bucket = copy.copy(bids[0])
                     bids = bids[1:]
-                print "in auto order..."
-                print trade_ask_bucket.price,trade_bid_bucket.price,trade_ask_bucket.amount, trade_bid_bucket.amount
+                # print "in auto order..."
+                # print trade_ask_bucket.price,trade_bid_bucket.price,trade_ask_bucket.amount, trade_bid_bucket.amount
                 if trade_ask_bucket.price*trade_ask_bucket.amount >= 0.1 and trade_bid_bucket.price*trade_bid_bucket.amount >= 0.1:
                     amount = min([trade_ask_bucket.amount,trade_bid_bucket.amount])
                     bid_eth = trade_bid_bucket.price*amount
                     ask_eth = trade_ask_bucket.price*amount
                     # print trade_ask_bucket.price
                     # print trade_bid_bucket.price
-                    print "pass...",bid_eth - ask_eth
+                    # print "pass...",bid_eth - ask_eth
                     pair = {
                         "bid":trade_bid_bucket,
                         "ask":trade_ask_bucket,

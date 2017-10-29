@@ -15,13 +15,13 @@ def get_profit_tokens_and_report():
                 exchanges.append("hitbtc")
             if token in LIQUI_TOKENS:
                 exchanges.append("liqui")
-            if token in BITTREX_TOKENS:
-                exchanges.append("bittrex")
+            #if token in BITTREX_TOKENS:
+            #    exchanges.append("bittrex")
             # print token
             if len(exchanges) <2:
                 continue
-            if token != "qtum":
-                continue
+            #if token != "qtum":
+            #    continue
             t = Token(token)
             t.get_token_order_info(exchanges)
             item = t.summary()

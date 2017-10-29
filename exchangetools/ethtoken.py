@@ -27,8 +27,10 @@ class Token(object):
 
     def get_token_order_info(self, exchanges):
         for exchange in exchanges:
+            # print 1
             i = exchange
             exchange = create_exchange(exchange)
+            # print 2
             token_orders = exchange.get_token_orders(self.token)
             token_orders = exchange.parser_order_items(self.token, token_orders)
             # print token_orders
