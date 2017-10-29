@@ -30,7 +30,7 @@ class Depth(object):
             if ask_bucket.price >= bid_bucket.price:
                 return depth
             decrese_amount = min(bid_bucket.amount, ask_bucket.amount)
-            print ask_bucket.price,ask_bucket.amount bid_bucket.price,bid_bucket.amount, decrese_amount,
+            print ask_bucket.price,ask_bucket.amount,bid_bucket.price,bid_bucket.amount, decrese_amount,
             trade_ask_bucket = copy.copy(ask_bucket)
             trade_bid_bucket = copy.copy(bid_bucket)
             trade_ask_bucket.amount = decrese_amount
