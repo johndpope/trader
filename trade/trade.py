@@ -1,4 +1,5 @@
 class Trade(object):
+    @staticmethod
     def arrange_order(ask, bid, amount):
         # print ask, bid
         # print "eeeeee"
