@@ -7,6 +7,8 @@ class Depth(object):
 
     @staticmethod
     def parse_depth(asks, bids):
+        asks = copy.copy(asks)
+        bids = bids.copy(bids)
         asks = sorted(asks, key= lambda ask: ask.price)
         bids = sorted(bids, key= lambda bid: bid.price, reverse=True)
         bid_bucket = None
@@ -30,7 +32,7 @@ class Depth(object):
             if ask_bucket.price >= bid_bucket.price:
                 return depth
             decrese_amount = min(bid_bucket.amount, ask_bucket.amount)
-            print ask_bucket.price,ask_bucket.amount,bid_bucket.price,bid_bucket.amount, decrese_amount,
+            print ask_bucket.price,ask_bucket.amount,bid_bucket.price,bid_bucket.amount, decrese_amount
             trade_ask_bucket = copy.copy(ask_bucket)
             trade_bid_bucket = copy.copy(bid_bucket)
             trade_ask_bucket.amount = decrese_amount
@@ -47,6 +49,8 @@ class Depth(object):
             depth.append(t)
     @staticmethod
     def parse_auto_order(asks, bids):
+        asks = copy.copy(asks)
+        bids = bids.copy(bids)
         print 1
         asks = sorted(asks, key= lambda ask: ask.price)
         print 2
