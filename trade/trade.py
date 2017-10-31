@@ -4,13 +4,13 @@ class Trade(object):
     def arrange_order(token,ask, bid, amount):
         # print ask, bid
         # print "eeeeee"
-        ask_exchange = create_exchange(ask.exchange)
-        bid_exchange = create_exchange(bid.exchange)
+        my_bid_exchange = create_exchange(ask.exchange)
+        my_ask_exchange = create_exchange(bid.exchange)
         # symbol, side, price,quantity
         print ask.exchange, token, "buy", ask.price, amount
         print bid.exchange, token,"sell", bid.price, amount
-        ask_exchange.order(token,"buy", ask.price, amount)
-        bid_exchange.order(token,"sell", bid.price, amount)
+        my_bid_exchange.order(token,"buy", ask.price, amount)
+        my_ask_exchange.order(token,"sell", bid.price, amount)
         # pass
     @classmethod
     def order(cls,token,pairs):

@@ -67,6 +67,8 @@ class Depth(object):
                 if not trade_bid_bucket:
                     trade_bid_bucket = copy.copy(bids[0])
                     bids = bids[1:]
+                if trade_ask_bucket.price > trade_bid_bucket.price:
+                    return pairs
                 # print "in auto order..."
                 # print trade_ask_bucket.price,trade_bid_bucket.price,trade_ask_bucket.amount, trade_bid_bucket.amount
                 if trade_ask_bucket.price*trade_ask_bucket.amount >= 0.1 and trade_bid_bucket.price*trade_bid_bucket.amount >= 0.1:

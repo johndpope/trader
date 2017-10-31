@@ -8,7 +8,7 @@ from settings.account import BITTREX
 
 class Bittrex(Exchange):
     def __init__(self):
-        self._prefix = "https://bittrex.com/api/v1.1/"
+        self._prefix = "https://bittrex.com/api/v1.1"
         self._key = BITTREX["key"]
         self._secret = BITTREX["secret"]
 
@@ -41,6 +41,7 @@ class Bittrex(Exchange):
 
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
+
     def order(self,symbol, side, price,quantity):
         print "eee"
         # url = "/api/v1.1/market/buylimit?apikey={apikey}&market={market}&quantity={quantity}&rate={price}".format(apikey=apikey, market=market, quantity=quantity,price=price )
@@ -51,13 +52,43 @@ class Bittrex(Exchange):
         # result = self.post("http://api.hitbtc.com" + path, headers={"Api-Signature": signature}, data=newOrder)
         # print result
 
-    def get_balance(self):
-        url = "https://bittrex.com/api/v1.1/account/getbalance?apikey={key}&currency=BTC&nonce={nonce}".format(key=self._key,nonce = int(time.time()))
+    def get_token_balance(self, token):
+        token = token.upper()
+        url = "https://bittrex.com/api/v1.1/account/getbalance?apikey={key}&currency={token}&nonce={nonce}".format(key=self._key,nonce = int(time.time()), token = token)
         apisign = hmac.new(self._secret.encode(),
                               url.encode(),
                               hashlib.sha512).hexdigest()
         result = self._fetch(url, headers={"apisign":apisign})
         print result
+    def get_balances(self):
+        """/account/getbalances"""
+        url = self._prefix + '/account/getbalances?apikey={key}&nonce={nonce}'.format(key=self._key,nonce = int(time.time()))
+        apisign = hmac.new(self._secret.encode(),
+                              url.encode(),
+                              hashlib.sha512).hexdigest()
+        result = self._fetch(url, headers={"apisign":apisign})
+        print result
+
+    def get_withdrawal_history(self):
+        """/account/getwithdrawalhistory"""
+        # token = token.upper()
+        url = self._prefix + '/account/getwithdrawalhistory?apikey={key}&nonce={nonce}'.format(key=self._key,nonce = int(time.time()))
+        apisign = hmac.new(self._secret.encode(),
+                              url.encode(),
+                              hashlib.sha512).hexdigest()
+        result = self._fetch(url, headers={"apisign":apisign})
+        print result
+
+    def get_deposit_history(self):
+        """/account/getdeposithistory"""
+        # token = token.upper()
+        url = self._prefix + '/account/getdeposithistory?apikey={key}&nonce={nonce}'.format(key=self._key,nonce = int(time.time()))
+        apisign = hmac.new(self._secret.encode(),
+                              url.encode(),
+                              hashlib.sha512).hexdigest()
+        result = self._fetch(url, headers={"apisign":apisign})
+        print result
+
 if __name__ == "__main__":
     b = Bittrex()
     # print b.get_symbols()
