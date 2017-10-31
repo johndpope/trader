@@ -65,7 +65,7 @@ class Hitbtc(Exchange):
 
     def get_balances(self):
         """/api/2/account/balance"""
-        r = requests.get('https://api.hitbtc.com/api/2/account/balance',auth=(self._key, self._secret))
+        r = requests.get('https://api.hitbtc.com/api/2/account/balance/trade',auth=(self._key, self._secret))
         balances = r.json()
         balances = filter(lambda x : float(x["available"]) >0 or float(x["reserved"]) > 0, balances)
         print balances
