@@ -67,10 +67,13 @@ class Hitbtc(Exchange):
         """/api/2/account/balance
         /api/2/trading/balance"""
         r = requests.get('https://api.hitbtc.com/api/2/trading/balance',auth=(self._key, self._secret))
-        print r
-        balances = r.json()
-        balances = filter(lambda x : float(x["available"]) >0 or float(x["reserved"]) > 0, balances)
-        print balances
+        # print r
+        balances1 = r.json()
+        balances1 = filter(lambda x : float(x["available"]) >0 or float(x["reserved"]) > 0, balances)
+        print balances1
+        r = requests.get('https://api.hitbtc.com/api/2/account/balance',auth=(self._key, self._secret))
+        balances2 = r.json()
+        balances2 = filter(lambda x : float(x["available"]) >0 or float(x["reserved"]) > 0, balances)
 
 if __name__ == "__main__":
     h = Hitbtc()
