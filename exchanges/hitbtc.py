@@ -63,7 +63,13 @@ class Hitbtc(Exchange):
         r  = requests.post('https://api.hitbtc.com/api/2/account/transfer', data = data, auth=(self._key, self._secret)) 
         print r.json()
 
+    def get_balances(self):
+        """/api/2/account/balance"""
+        r = requests.get('https://api.hitbtc.com/api/2/account/balance',auth=(self._key, self._secret))
+        print r.json()
+
 if __name__ == "__main__":
     h = Hitbtc()
+    h.get_balances()
     # h.order("SNCETH","buy",'0.00012','0.3')
     #print h.get_symbols()
