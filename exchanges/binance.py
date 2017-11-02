@@ -3,7 +3,7 @@ import models
 import hmac
 import hashlib
 import time
-import requests
+# import requests
 from exchanges.common import Exchange
 from settings.account import BINANCE
 try:
@@ -28,7 +28,7 @@ class Binance(Exchange):
         url = self._prefix  + "/api/v1/ticker/allPrices"
         symbols = [ item["symbol"] for item in json.loads(self._fetch(url)) ]
         raw_items = filter(lambda x:x.endswith("ETH"), symbols)
-        return [ item[:-4].lower() for item in raw_items ]
+        return [ item[:-3].lower() for item in raw_items ]
 
     def get_token_orders(self, token):
         url = self._prefix + '/api/v1/depth?symbol=' + token.upper() + "ETH"
