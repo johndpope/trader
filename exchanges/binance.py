@@ -37,15 +37,20 @@ class Binance(Exchange):
     def parser_order_items(self, token, response):
         orders = json.loads(response).values()[0]
         new_orders = []
-        for _type,values in orders.items():
-            for item in values:
-                i = {
-                    "type":_type,
-                    "price":item[0],
-                    "amount":item[1],
-                    "exchange":"liqui"
-                }
-                new_orders.append(i)
+        try:
+            for _type,values in orders.items():
+                if _type not in ["bids", "asks"]:
+                    continue
+                for item in values:
+                    i = {
+                        "type":_type,
+                        "price":item[0],
+                        "amount":item[1],
+                        "exchange":"binance"
+                    }
+                    new_orders.append(i)
+        except:
+            pass
 
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
