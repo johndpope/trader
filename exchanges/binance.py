@@ -51,7 +51,7 @@ class Binance(Exchange):
                     new_orders.append(i)
         except:
             pass
-        print new_orders
+        # print new_orders
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
 
