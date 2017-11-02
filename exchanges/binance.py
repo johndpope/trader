@@ -53,3 +53,4 @@ class Binance(Exchange):
 if __name__ == "__main__":
     b = Binance()
     print b.get_symbols()
+    print b.get_token_orders("eos")

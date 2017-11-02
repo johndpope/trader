@@ -8,3 +8,6 @@ def create_exchange(exchange):
     if exchange == "bittrex":
         from exchanges.bittrex import Bittrex
         return Bittrex()
+    if exchange == "binance":
+        from exchanges.binance import Binance
+        return Binance()
