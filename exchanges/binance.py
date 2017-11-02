@@ -35,7 +35,7 @@ class Binance(Exchange):
         return self._fetch(url)
 
     def parser_order_items(self, token, response):
-        orders = json.loads(response).values()[0]
+        orders = json.loads(response)
         new_orders = []
         try:
             for _type,values in orders.items():
