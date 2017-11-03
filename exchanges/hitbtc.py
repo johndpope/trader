@@ -5,7 +5,7 @@ import hmac
 import random
 import string
 import time
-import requests
+# import requests
 
 import tornado.gen
 import models
@@ -46,6 +46,7 @@ class Hitbtc(Exchange):
         return token_orders
 
     def order(self,token, side, price,quantity):
+        import requests
         """/api/1/trading/new_order"""
         symbol = token + "eth"
         symbol = symbol.upper()
@@ -57,6 +58,7 @@ class Hitbtc(Exchange):
         print(r.json())
         # print result.body
     def transfer(self, token, amount, trans_type):
+        import requests
         # key = HITBTC["key"]
         # secret = 
         data = {"currency":token, "amount":amount, "type":trans_type}
@@ -64,6 +66,7 @@ class Hitbtc(Exchange):
         print r.json()
 
     def get_balances(self):
+        import requests
         """/api/2/account/balance
         /api/2/trading/balance"""
         r = requests.get('https://api.hitbtc.com/api/2/trading/balance',auth=(self._key, self._secret))
