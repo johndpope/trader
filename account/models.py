@@ -37,7 +37,10 @@ class ExchangeTokens(object):
 
     def get_balance_record_by_exchange(self, exchange):
         with aquire_cursor() as cursor:
-            stmt = "select * from "
+            stmt = "select * from"
+            cursor.execute(stmt)
+            data = cursor.fetchall()
+        print data
 
     def get_balance_records_by_exchange_and_token(self, exchange, token):
         pass
