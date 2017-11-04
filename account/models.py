@@ -1,3 +1,4 @@
+# -*- coding=utf-8 -*-
 from libs.db import aquire_cursor
 class TokenRecoder(object):
     """
