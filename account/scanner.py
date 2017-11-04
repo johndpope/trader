@@ -16,6 +16,6 @@ class AccountScanner(object):
             balances = self.scan_exchange(exchange)
             local_balances = self.scan_local_balance(exchange)
             for balance in balances:
-                self._exchange_tokens.save_token_record()
+                self._exchange_tokens.save_token_record(balance)
 
 account_scanner = AccountScanner()
