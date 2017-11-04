@@ -63,7 +63,9 @@ class Binance(Exchange):
                               hashlib.sha256).hexdigest()
         url = url + '?' + query_string + '&' + 'signature=' + apisign
         result = self._fetch(url, headers={"X-MBX-APIKEY":self._key})
-        print result
+        balances = json.loads(result)["balances"]
+        balances = filter(lambda x : float(x["free"]) >0 or float(x["locked"]) > 0, balances)
+        print balances
 
 if __name__ == "__main__":
     b = Binance()
