@@ -7,7 +7,7 @@ import MySQLdb
 import MySQLdb.cursors
 from DBUtils.PooledDB import PooledDB
 
-from settings import ENV, MYSQLCONF
+from settings.db import ENV, MYSQLCONF
 
 
 
