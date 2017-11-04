@@ -30,7 +30,12 @@ class AccountScanner(object):
             token_record_2 = token_records[1]
             rt,amount = transaction_balance.balance_between_account_with_hardcode_policy(token_record_1, token_record_2)
             if rt:
-                print amount
+                if amount > 0:
+                    print "From {from_exchange} to {to_exchange} amount {amount}".format(from_exchange=token_record_1["exchange"],
+                        to_exchange=token_record_2["exchange"], amount=amount)
+                else:
+                    print "From {from_exchange} to {to_exchange} amount {amount}".format(from_exchange=token_record_2["exchange"],
+                        to_exchange=token_record_1["exchange"], amount=abs(amount))
                 pairs.append(token_records)
         return pairs
 
