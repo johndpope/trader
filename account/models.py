@@ -58,6 +58,15 @@ class ExchangeTokens(object):
     def get_balance_records_by_token(self, token):
         pass
 
+    def get_tokens(self):
+        with aquire_cursor() as cursor:
+            stmt = "SELECT DISTINCT token from token_record"
+            cursor.execute(stmt)
+            data = cursor.fetchall()
+        if not data:
+            return []
+        return data
+
 class TranscationRecords(object):
     def __init__(self):
         pass

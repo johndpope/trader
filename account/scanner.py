@@ -14,8 +14,12 @@ class AccountScanner(object):
     def scan_all_account_and_save(self):
         for exchange in ["binance","hitbtc"]:
             balances = self.scan_exchange(exchange)
-            local_balances = self.scan_local_balance(exchange)
+            # local_balances = self.scan_local_balance(exchange)
             for balance in balances:
                 self._exchange_tokens.save_token_record(balance)
+
+    def get_transfer_token_pairs(self):
+        tokens = self._exchange_tokens.get_tokens()
+        print tokens
 
 account_scanner = AccountScanner()
