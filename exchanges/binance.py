@@ -65,7 +65,7 @@ class Binance(Exchange):
         result = self._fetch(url, headers={"X-MBX-APIKEY":self._key})
         balances = json.loads(result)["balances"]
         balances = filter(lambda x : float(x["free"]) >0 or float(x["locked"]) > 0, balances)
-        print balances
+        return balances
 
 if __name__ == "__main__":
     b = Binance()
