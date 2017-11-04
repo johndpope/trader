@@ -55,7 +55,9 @@ class Binance(Exchange):
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
     def get_balances(self):
-        """/account/getbalances"""
+        """/account/getbalances
+            {u'locked': u'0.00000000', u'asset': u'ETH', u'free': u'0.00002882'}
+        """
         url = self._prefix + '/api/v3/account'
         query_string = 'timestamp=' + str(int(time.time()*1000))
         apisign = hmac.new(self._secret.encode(),
@@ -65,7 +67,14 @@ class Binance(Exchange):
         result = self._fetch(url, headers={"X-MBX-APIKEY":self._key})
         balances = json.loads(result)["balances"]
         balances = filter(lambda x : float(x["free"]) >0 or float(x["locked"]) > 0, balances)
-        return balances
+        ret = []
+        for balance in balances:
+            item = {}
+            item["token"] = balance["asset"]
+            item["amount"] = balance["free"]
+            item["exchange"] = "binance"
+            ret.append(item)
+        return ret
 
 if __name__ == "__main__":
     b = Binance()
