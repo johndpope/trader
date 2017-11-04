@@ -40,7 +40,8 @@ class ExchangeTokens(object):
             stmt = "select * from token_record"
             cursor.execute(stmt)
             data = cursor.fetchall()
-        print data
+        if not data:
+            return []
 
     def get_balance_records_by_exchange_and_token(self, exchange, token):
         pass
