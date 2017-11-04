@@ -54,3 +54,4 @@ db = Db(
     MYSQLCONF[env]["min_thr"],
     MYSQLCONF[env]["max_thr"]
 )
+aquire_cursor = partial(common_cursor, db)

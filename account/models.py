@@ -1,3 +1,4 @@
+from libs.db import aquire_cursor
 class TokenRecoder(object):
     """
         item:
@@ -34,7 +35,8 @@ class ExchangeTokens(object):
         pass
 
     def get_balance_record_by_exchange(self, exchange):
-        pass
+        with aquire_cursor() as cursor:
+            stmt = "select * from "
 
     def get_balance_records_by_exchange_and_token(self, exchange, token):
         pass
@@ -48,3 +50,4 @@ class TranscationRecords(object):
 
     def get_transcation_by_exchange_and_token(self):
         pass
+exchange_tokens = ExchangeTokens()
