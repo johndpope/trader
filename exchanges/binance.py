@@ -54,8 +54,19 @@ class Binance(Exchange):
         # print new_orders
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
+    def get_balances(self):
+        """/account/getbalances"""
+        url = self._prefix + '/api/v3/account'
+        query_string = 'timestamp=' + str(int(time.time()*1000))
+        apisign = hmac.new(self._secret.encode(),
+                              query_string,
+                              hashlib.sha256).hexdigest()
+        url = url + '?' + query_string + '&' + 'signature=' + apisign
+        result = self._fetch(url, headers={"X-MBX-APIKEY":self._key})
+        print result
 
 if __name__ == "__main__":
     b = Binance()
     print b.get_symbols()
-    print b.get_token_orders("eos")
+    # print b.get_token_orders("eos")
+    print b.get_balances()
