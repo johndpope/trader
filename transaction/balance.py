@@ -15,9 +15,11 @@ class Balance(object):
             # return False
         # if balance_record_b.deposit != 0 or balance_record_b.withdraw != 0:
             # return False
-        # if balance_record_a.amount*balance_record_a.price + balance_record_b.amount*balance_record_b.price < 5:
-            # return False
-        amount = (balance_record_a.amount - balance_record_b.amount)/2
+        balance_record_a["price"] = 0.1
+        balance_record_b["price"] = 0.1
+        if balance_record_a["amount"]*balance_record_a["price"] + balance_record_b["amount"]*balance_record_b["price"] < 5:
+            return False,0
+        amount = (balance_record_a["amount"] - balance_record_b["amount"])/2
         return True,amount
         # self._balance_between_account(balance_record_a, balance_record_b, amount)
 

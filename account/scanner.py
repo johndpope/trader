@@ -24,7 +24,7 @@ class AccountScanner(object):
         pairs = []
         for token in tokens:
             token_records = self._exchange_tokens.get_balance_records_by_token(token)
-            if token_records != 2:
+            if len(token_records) != 2:
                 continue
             token_record_1 = token_records[0]
             token_record_2 = token_records[1]
