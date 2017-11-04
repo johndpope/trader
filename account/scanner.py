@@ -5,7 +5,7 @@ class AccountScanner(object):
         balance = exchange.get_balances()
 
     def scan_all_account_and_save(self):
-        for exchange in ["binance","liqui","hitbtc"]:
+        for exchange in ["binance","hitbtc"]:
             self.scan_exchange(exchange)
 
 account_scanner = AccountScanner()
