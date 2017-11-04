@@ -65,7 +65,7 @@ class ExchangeTokens(object):
             data = cursor.fetchall()
         if not data:
             return []
-        return data
+        return [ item["token"] for item in data ]
 
 class TranscationRecords(object):
     def __init__(self):
