@@ -43,6 +43,14 @@ class ExchangeTokens(object):
         if not data:
             return []
 
+    def save_token_record(self, token_record):
+        token = token_record["token"]
+        exchange = token_record["exchange"]
+        amount = token_record["amount"]
+        with aquire_cursor() as cursor:
+            stmt  = "insert into token_record (token, exchange, amount) VALUES ('{token}', '{exchange}', '{amount}')".format(token=token, exchange=exchange,amount = amount)
+            cursor.execute(stmt)
+
     def get_balance_records_by_exchange_and_token(self, exchange, token):
         pass
 
