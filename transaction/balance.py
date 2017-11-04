@@ -11,14 +11,15 @@ class Balance(object):
 
     def balance_between_account_with_hardcode_policy(self, balance_record_a , balance_record_b):
         """when balance, the balance is from a to b"""
-        if balance_record_a.deposit != 0 or balance_record_a.withdraw != 0:
-            return
-        if balance_record_b.deposit != 0 or balance_record_b.withdraw != 0:
-            return
-        if balance_record_a.amount*balance_record_a.price + balance_record_b.amount*balance_record_b.price < 5:
-            return
+        # if balance_record_a.deposit != 0 or balance_record_a.withdraw != 0:
+            # return False
+        # if balance_record_b.deposit != 0 or balance_record_b.withdraw != 0:
+            # return False
+        # if balance_record_a.amount*balance_record_a.price + balance_record_b.amount*balance_record_b.price < 5:
+            # return False
         amount = (balance_record_a.amount - balance_record_b.amount)/2
-        self._balance_between_account(balance_record_a, balance_record_b, amount)
+        return True,amount
+        # self._balance_between_account(balance_record_a, balance_record_b, amount)
 
 class Transaction(object):
     def withdraw(self, balance_record_a, balance_record_b, amount):
@@ -26,3 +27,5 @@ class Transaction(object):
         to_address = TOKEN_ADDR[balance_record_b.exchange][balance_record_b.token]
         from_exchange = libs.utils.create_exchange(balance_record_a.exchange)
         from_exchange.withdraw(balance_record_a.token, to_address ,amount)
+
+transaction_balance = Balance()

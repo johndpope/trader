@@ -56,7 +56,10 @@ class ExchangeTokens(object):
         pass
 
     def get_balance_records_by_token(self, token):
-        pass
+        with aquire_cursor() as cursor:
+            stmt = "SELECT * from token_record WHERE token='{token}'".format(token=token)
+            cursor.execute(stmt)
+            return cursor.fetchall()
 
     def get_tokens(self):
         with aquire_cursor() as cursor:
