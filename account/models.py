@@ -47,8 +47,9 @@ class ExchangeTokens(object):
         token = token_record["token"]
         exchange = token_record["exchange"]
         amount = token_record["amount"]
+        identify = token + "_" + exchange
         with aquire_cursor() as cursor:
-            stmt  = "insert into token_record (token, exchange, amount) VALUES ('{token}', '{exchange}', '{amount}')".format(token=token, exchange=exchange,amount = amount)
+            stmt  = "INSERT INTO token_record (identify,token, exchange, amount) VALUES ('{identify}','{token}', '{exchange}', '{amount}') ON DUPLICATE KEY UPDATE amount={amount}".format(identify=identify,token=token, exchange=exchange,amount = amount)
             cursor.execute(stmt)
 
     def get_balance_records_by_exchange_and_token(self, exchange, token):

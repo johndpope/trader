@@ -70,7 +70,7 @@ class Binance(Exchange):
         ret = []
         for balance in balances:
             item = {}
-            item["token"] = balance["asset"]
+            item["token"] = balance["asset"].lower()
             item["amount"] = balance["free"]
             item["exchange"] = "binance"
             ret.append(item)
