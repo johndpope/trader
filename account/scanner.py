@@ -5,7 +5,8 @@ class AccountScanner(object):
         self._exchange_tokens = exchange_tokens
     def scan_exchange(self, exchange):
         exchange = create_exchange(exchange)
-        balance = exchange.get_balances()
+        balances = exchange.get_balances()
+        return balances
 
 
     def scan_local_balance(self, exchange):
