@@ -9,10 +9,13 @@ class AccountScanner(object):
         balances = exchange.get_balances()
         prices = exchange.get_all_price()
         ret = []
-        try:
-            for balance in balances:
+        for balance in balances:
+            try:
                 balance["price"] = prices[balance["token"]]["price"]
                 ret.append(balance)
+            except:
+                pass
+        print ret
         return ret
 
 
