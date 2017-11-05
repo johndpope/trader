@@ -45,6 +45,7 @@ class Binance(Exchange):
             token_name = token["symbol"][:-4]
             item["token"] = token_name
             item["price"] = token["price"]
+            item["exchange"] = "binance"
             info.append(item)
         print info
         return info
