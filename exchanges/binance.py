@@ -34,6 +34,11 @@ class Binance(Exchange):
         url = self._prefix + '/api/v1/depth?symbol=' + token.upper() + "ETH"
         return self._fetch(url)
 
+    def get_all_price(self):
+        url = self._prefix + '/api/v1/ticker/allPrices'
+        # url = self._prefix + '/api/v1/depth?symbol=' + token.upper() + "ETH"
+        return self._fetch(url)
+
     def parser_order_items(self, token, response):
         orders = json.loads(response)
         new_orders = []
@@ -80,4 +85,4 @@ if __name__ == "__main__":
     b = Binance()
     print b.get_symbols()
     # print b.get_token_orders("eos")
-    print b.get_balances()
+    print b.get_all_price()
