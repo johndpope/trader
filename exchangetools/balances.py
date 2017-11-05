@@ -1,5 +1,6 @@
 import time
 from account.scanner import account_scanner
+from exchangetools.report import report_balance
 
 def main():
     while True:
@@ -14,7 +15,7 @@ def main():
                 items.append(item)
         # for exchange in ["hitbtc", "binance"]:
             # ret.extends(account_scanner.get_balances(exchange))
-        print items
+        report_balance(items)
         print "time to sleep...."
         time.sleep(100)
         # for token_pair in token_pairs:
