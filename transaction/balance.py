@@ -21,7 +21,7 @@ class Balance(object):
         if balance_record_a["amount"]*balance_record_a["price"] + balance_record_b["amount"]*balance_record_b["price"] < 1.5:
             return False,0
         amount = (balance_record_a["amount"] - balance_record_b["amount"])/2
-        if amount*balance_record_a["price"] < 0.5:
+        if amount*balance_record_a["price"] < 0.3:
             return False,0
         return True,amount
         # self._balance_between_account(balance_record_a, balance_record_b, amount)
