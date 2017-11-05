@@ -20,5 +20,8 @@ def report_with_depth(item):
         aprice = item["asks"]["price"], aexchange = item["asks"]["exchange"],depth = depth_text
         )
     telegram_bot.sendmsg(-1001121650710,text)
+
+def report_balance(item):
+    telegram_bot.sendmsg(-1001205170565, text)
 if __name__ == "__main__":
     report("x")
