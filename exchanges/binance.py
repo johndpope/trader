@@ -46,6 +46,7 @@ class Binance(Exchange):
             item["token"] = token_name
             item["price"] = token["price"]
             info.append(item)
+        print info
         return info
 
     def parser_order_items(self, token, response):
