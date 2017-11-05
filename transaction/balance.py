@@ -15,8 +15,9 @@ class Balance(object):
             # return False
         # if balance_record_b.deposit != 0 or balance_record_b.withdraw != 0:
             # return False
-        balance_record_a["price"] = 0.1
-        balance_record_b["price"] = 0.1
+        # balance_record_a["price"] = 0.1
+        # balance_record_b["price"] = 0.1
+        print balance_record_a["price"],balance_record_b["price"],balance_record_a["amount"]*balance_record_a["price"],balance_record_b["amount"]*balance_record_b["price"]
         if balance_record_a["amount"]*balance_record_a["price"] + balance_record_b["amount"]*balance_record_b["price"] < 5:
             return False,0
         amount = (balance_record_a["amount"] - balance_record_b["amount"])/2
