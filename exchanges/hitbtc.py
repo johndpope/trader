@@ -81,6 +81,22 @@ class Hitbtc(Exchange):
             item["exchange"] = "hitbtc"
             ret.append(item)
         return ret
+    def get_all_price(self):
+        url = self._prefix + '/api/2/public/ticker'
+        # url = self._prefix + '/api/v1/depth?symbol=' + token.upper() + "ETH"
+        all_prices = json.loads(self._fetch(url))
+        all_prices = filter(lambda x:x["symbol"].endswith("ETH"), all_prices )
+        info = {}
+        for token in all_prices:
+            item = {}
+            token_name = token["symbol"][:-3].lower()
+            item["token"] = token_name
+            item["price"] = token["bid"]
+            item["exchange"] = "hitbtc"
+            # info.append(item)
+            info[token_name] = item
+        # print info
+        return info
         # print balances1
         # r = requests.get('https://api.hitbtc.com/api/2/account/balance',auth=(self._key, self._secret))
         # balances2 = r.json()

@@ -7,7 +7,13 @@ class AccountScanner(object):
     def scan_exchange(self, exchange):
         exchange = create_exchange(exchange)
         balances = exchange.get_balances()
-        return balances
+        prices = exchange.get_all_price()
+        ret = []
+        try:
+            for balance in balances:
+                balance["price"] = prices[balance["token"]]["price"]
+                ret.append(balance)
+        return ret
 
 
     def scan_local_balance(self, exchange):
