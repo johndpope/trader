@@ -23,9 +23,13 @@ def report_with_depth(item):
 
 def report_balance(items):
     report_text = ""
+    total_value = 0
     for item in items:
         report_text += "Token:{token} Exchange:{exchange} Values_in_eth:{values} Amount:{amount} Price:{price}\n".format(
             token=item["token"], exchange=item["exchange"], amount=item["amount"], price=item["price"], values="{0:.2f}".format(float(item["price"])*float(item["amount"])))
+        total_value +=float(item["price"])*float(item["amount"])
+
+    report_text +="------------------\nTotal value in eth:{total_value}\n".format(total_value=total_value)
     telegram_bot.sendmsg(-1001205170565, report_text)
 if __name__ == "__main__":
     report("x")
