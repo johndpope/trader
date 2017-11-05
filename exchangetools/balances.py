@@ -6,8 +6,10 @@ def main():
         # account_scanner.scan_all_account_and_save()
         # time.sleep(1)
         # token_pairs = account_scanner.get_transfer_token_pairs()
-        for exchange in ["hitbtc", "binance"]:
-            account_scanner.scan_local_balance(exchange)
+        # ret = []
+        print account_scanner.get_balances()
+        # for exchange in ["hitbtc", "binance"]:
+            # ret.extends(account_scanner.get_balances(exchange))
         print "time to sleep...."
         time.sleep(100)
         # for token_pair in token_pairs:
