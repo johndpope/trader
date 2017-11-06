@@ -91,6 +91,15 @@ class ExchangeTokens(object):
             return []
         return [ item["exchange"] for item in data ]
 
+    def get_exchange_token_amount(self, token, exchange):
+        with aquire_cursor() as cursor:
+            stmt = "SELECT amount from token_record where token='{token}' and exchange='{exchange}'".format(token=token, exchange=exchange)
+            cursor.exchange(stmt)
+            data = cursor.fetchall()
+        if not data:
+            return 0
+        return data[0]["amount"]
+
 class TranscationRecords(object):
     def __init__(self):
         pass

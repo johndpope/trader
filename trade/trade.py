@@ -1,4 +1,5 @@
 from libs.utils import create_exchange
+from account.models import exchange_tokens
 class Trade(object):
     @staticmethod
     def arrange_order(token,ask, bid, amount):
@@ -9,8 +10,19 @@ class Trade(object):
         # symbol, side, price,quantity
         print ask.exchange, token, "buy", ask.price, amount
         print bid.exchange, token,"sell", bid.price, amount
+        # if not self.check_enough_token(ask.exchange, "eth", ask.price*amount):
+            # return 
+        # if not self.check_enough_token(bid.exchange, token, amount):
+            # return
+        amount = self.get_smallest_amount(token, ask.exchange, ask.price, bid.exchange, amount)
         my_bid_exchange.order(token,"buy", ask.price, amount)
         my_ask_exchange.order(token,"sell", bid.price, amount)
+
+    def get_smallest_amount(self, token,ask_exchange,ask_price, bid_exchange, amount ):
+        ask_eth = exchange_tokens.get_exchange_token_amount("eth", ask_exchange)
+        ask_amount = ask_eth/ask_price
+        bid_amount = exchange_tokens.get_exchange_token_amount(token, bid_exchange)
+        return min([ask_amount, bid_amount, amount])
         # pass
     @classmethod
     def order(cls,token,pairs):

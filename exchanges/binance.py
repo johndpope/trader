@@ -51,6 +51,42 @@ class Binance(Exchange):
         # print info
         return info
 
+    def order(self,token, side, price,quantity):
+        # import requests
+        """/api/v3/order"""
+        # symbol = token + "eth"
+        # symbol = symbol.upper()
+        # key = HITBTC["key"]
+        # secret = HITBTC["secret"]
+        # orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
+        # print "hitbtc",orderData
+        # r = requests.post('https://api.hitbtc.com/api/2/order', data = orderData, auth=(key, secret))      
+        # print(r.json())
+
+        symbol = token + "eth"
+        symbol = symbol.upper()
+        url = self._prefix + '/api/v3/order'
+        # query_string = 'symbol=' + symbol + '&timestamp=' + str(int(time.time()*1000)) + '&side=' + side.upper() + '&type=LIMIT&timeInForce=GTCquantity=1&price=0.1&recvWindow=5000&timestamp='
+        timestamp = str(int(time.time()*1000))
+        query_string = 'symbol={symbol}&side={side}&type=LIMIT&timeInForce=GTCquantity={quantity}&price={price}&recvWindow=5000&timestamp={timestamp}'.format(symbol=symbol, side=side.upper(), quantity=quantity, price=price, timestamp=timestamp)
+        apisign = hmac.new(self._secret.encode(),
+                              query_string,
+                              hashlib.sha256).hexdigest()
+        url = url + '?' + 'symbol={symbol}&side={side}&type=LIMIT&timeInForce=GTC'.format(symbol=symbol, side=side.upper())
+        data = "quantity={quantity}&price={price}&recvWindow=5000&timestamp={timestamp}&signature={apisign}".format(quantity=quantity, price=price, timestamp=timestamp,apisign=apisign)
+        result = self.post(url, headers={"X-MBX-APIKEY":self._key},data=data)
+        print json.loads(result.body)
+        # balances = json.loads(result)["balances"]
+        # # balances = filter(lambda x : float(x["free"]) >0 or float(x["locked"]) > 0, balances)
+        # ret = []
+        # for balance in balances:
+        #     item = {}
+        #     item["token"] = balance["asset"].lower()
+        #     item["amount"] = balance["free"]
+        #     item["exchange"] = "binance"
+        #     ret.append(item)
+        # return ret
+
     def parser_order_items(self, token, response):
         orders = json.loads(response)
         new_orders = []
@@ -108,7 +144,8 @@ class Binance(Exchange):
 
 if __name__ == "__main__":
     b = Binance()
-    b.withdraw("enj","0x7f59fbfe6C2cBA95173d69B4B0B00E09c76501FC",1000)
+    # b.withdraw("enj","0x7f59fbfe6C2cBA95173d69B4B0B00E09c76501FC",1000)
+    b.order("enj","buy","0.000000001","1")
     #print b.get_symbols()
     # print b.get_token_orders("eos")
     #print b.get_all_price()
