@@ -3,6 +3,7 @@ from settings.tokens import HITBTC_TOKENS, LIQUI_TOKENS, BITTREX_TOKENS
 from exchangetools.ethtoken import Token
 from exchangetools.report import report,report_with_depth
 from trade.trade import auto_trader
+from account.models import exchange_tokens
 
 def get_profit_tokens_and_report():
     # tokens = TOKENS
