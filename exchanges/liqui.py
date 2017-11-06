@@ -72,7 +72,7 @@ class Liqui(Exchange):
         data = resp.json()
         if 'error' in data:
             # raise LiquiApiError(data['error'])
-            # print data["error"]
+            print data["error"]
         return data.get('return', data)
 
     def order(self,token, side, price,quantity):
@@ -98,7 +98,7 @@ class Liqui(Exchange):
         data = resp.json()
         if 'error' in data:
             # raise LiquiApiError(data['error'])
-            # print data["error"]
+            print data["error"]
         return data.get('return', data)
 if __name__ == "__main__":
     b = Liqui()
