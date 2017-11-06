@@ -94,7 +94,7 @@ class ExchangeTokens(object):
     def get_exchange_token_amount(self, token, exchange):
         with aquire_cursor() as cursor:
             stmt = "SELECT amount from token_record where token='{token}' and exchange='{exchange}'".format(token=token, exchange=exchange)
-            cursor.exchange(stmt)
+            cursor.execute(stmt)
             data = cursor.fetchall()
         print data
         if not data:
