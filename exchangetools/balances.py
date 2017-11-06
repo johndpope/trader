@@ -17,7 +17,7 @@ def main():
             # ret.extends(account_scanner.get_balances(exchange))
         report_balance(items)
         print "time to sleep...."
-        time.sleep(100)
+        time.sleep(1000)
         # for token_pair in token_pairs:
         #     balance._balance_between_account(token_pair["from"], token_pair["to"], token_pair["amount"])
 
