@@ -96,6 +96,7 @@ class ExchangeTokens(object):
             stmt = "SELECT amount from token_record where token='{token}' and exchange='{exchange}'".format(token=token, exchange=exchange)
             cursor.exchange(stmt)
             data = cursor.fetchall()
+        print data
         if not data:
             return 0
         return data[0]["amount"]
