@@ -73,7 +73,32 @@ class Liqui(Exchange):
         if 'error' in data:
             # raise LiquiApiError(data['error'])
             print data["error"]
-        return data.get('return', data)
+        balances = data.get('return', data)
+        ret = []
+        for token, amount in balances["funds"].items():
+            item = {}
+            item["token"] = token.lower()
+            item["amount"] = amount
+            item["exchange"] = "liqui"
+            ret.append(item)
+        return ret
+
+    def get_all_price(self):
+        url = self._prefix + '/api/v1/ticker/allPrices'
+        # url = self._prefix + '/api/v1/depth?symbol=' + token.upper() + "ETH"
+        all_prices = json.loads(self._fetch(url))
+        all_prices = filter(lambda x:x["symbol"].endswith("ETH"), all_prices )
+        info = {}
+        for token in all_prices:
+            item = {}
+            token_name = token["symbol"][:-3].lower()
+            item["token"] = token_name
+            item["price"] = token["price"]
+            item["exchange"] = "binance"
+            # info.append(item)
+            info[token_name] = item
+        # print info
+        return info
 
     def order(self,token, side, price,quantity):
         """/api/1/trading/new_order"""
