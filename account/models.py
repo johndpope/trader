@@ -84,7 +84,7 @@ class ExchangeTokens(object):
 
     def get_token_exchanges(self, token):
         with aquire_cursor() as cursor:
-            stmt = "SELECT DISTINCT token from token_record where token='{token}'".format(token=token)
+            stmt = "SELECT DISTINCT exchange from token_record where token='{token}'".format(token=token)
             cursor.execute(stmt)
             data = cursor.fetchall()
         if not data:
