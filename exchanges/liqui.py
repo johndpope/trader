@@ -49,6 +49,32 @@ class Liqui(Exchange):
         token_orders = models.order.Orders(token.lower(),new_orders)
         return token_orders
 
+    def get_balances(self):
+        """/api/1/trading/new_order"""
+        # key = HITBTC["key"]
+        # secret = HITBTC["secret"]
+        # orderData = {'symbol':symbol, 'side': side, 'quantity': quantity, 'price': price }
+        # print orderData
+        # https://api.liqui.io/api/3/<method name>/<pair listing>
+        # pair = token + "_" + "eth"
+        params = {
+            "method":'getInfo'
+            # "pair":pair, 
+            # "type":side, 
+            # "rate":price,
+            # "amount":quantity
+            }
+        params.update(nonce=int(time.time()))
+        headers = {'Key': self._key, 'Sign': self._sign(params)}
+        # print "liqui",params
+        resp = requests.post('https://api.liqui.io/tapi', data=params, headers=headers)
+        # print resp
+        data = resp.json()
+        if 'error' in data:
+            # raise LiquiApiError(data['error'])
+            # print data["error"]
+        return data.get('return', data)
+
     def order(self,token, side, price,quantity):
         """/api/1/trading/new_order"""
         # key = HITBTC["key"]
@@ -66,15 +92,16 @@ class Liqui(Exchange):
             }
         params.update(nonce=int(time.time()))
         headers = {'Key': self._key, 'Sign': self._sign(params)}
-        print "liqui",params
+        # print "liqui",params
         resp = requests.post('https://api.liqui.io/tapi', data=params, headers=headers)
-        print resp
+        # print resp
         data = resp.json()
         if 'error' in data:
             # raise LiquiApiError(data['error'])
-            print data["error"]
+            # print data["error"]
         return data.get('return', data)
 if __name__ == "__main__":
     b = Liqui()
     print b.get_symbols()
-    print b.order("knc","buy","0.002",1)
+    # print b.order("knc","buy","0.002",1)
+    print b.get_balances()
