@@ -24,8 +24,8 @@ def get_profit_tokens_and_report():
             # print token
             if len(exchanges) <2:
                 continue
-            if token != "snm":
-                continue
+            # if token != "snm":
+                # continue
             t = Token(token)
             t.get_token_order_info(exchanges)
             item = t.summary()
