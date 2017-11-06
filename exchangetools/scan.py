@@ -2,10 +2,12 @@ import time
 from settings.tokens import HITBTC_TOKENS, LIQUI_TOKENS, BINANCE_TOKENS
 from exchangetools.ethtoken import Token
 from exchangetools.report import report,report_with_depth
+from account.models import exchange_tokens
 
 def get_profit_tokens_and_report():
     # tokens = TOKENS
-    tokens = set(HITBTC_TOKENS) | set(LIQUI_TOKENS) | set(BINANCE_TOKENS)
+    # tokens = set(HITBTC_TOKENS) | set(LIQUI_TOKENS) | set(BINANCE_TOKENS)
+    tokens = exchange_tokens.get_tokens()
     items = []
     for token in tokens:
         try:

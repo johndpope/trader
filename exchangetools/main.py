@@ -20,8 +20,8 @@ def get_profit_tokens_and_report():
             # print token
             if len(exchanges) <2:
                 continue
-            #if token != "qtum":
-            #    continue
+            if token != "snm":
+                continue
             t = Token(token)
             t.get_token_order_info(exchanges)
             item = t.summary()
@@ -30,7 +30,7 @@ def get_profit_tokens_and_report():
             if item["profit"] > 1:
                 print "__________import__________"
                 # print item
-                report_with_depth(item)
+                # report_with_depth(item)
                 auto_trader.order(token,item["auto_order"])
 
         except Exception as e:
@@ -41,4 +41,4 @@ if __name__ == "__main__":
     while True:
         get_profit_tokens_and_report()
         print "-------------sleep---------------"
-        time.sleep(100)
+        time.sleep(10)

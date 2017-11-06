@@ -87,4 +87,5 @@ class TranscationRecords(object):
 
     def get_transcation_by_exchange_and_token(self):
         pass
+token_recorder = TokenRecoder()
 exchange_tokens = ExchangeTokens()

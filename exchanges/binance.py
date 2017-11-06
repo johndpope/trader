@@ -92,9 +92,23 @@ class Binance(Exchange):
             item["exchange"] = "binance"
             ret.append(item)
         return ret
+    def withdraw(self, token, address, amount):
+        url = self._prefix + '/wapi/v1/withdraw.html'
+        timestamp = str(int(time.time()*1000))
+        query_string = 'name=from_api&recvWindow=5000&asset={token}&address={address}&amount={amount}&timestamp={timestamp}'.format(token=token, address=address, amount=amount, timestamp=timestamp)
+        apisign = hmac.new(self._secret.encode(),
+                              query_string,
+                              hashlib.sha256).hexdigest()
+        url = url + '?' + query_string + '&' + 'signature=' + apisign
+        #data = query_string + '&' + 'signature=' + apisign
+        data = ""
+        result = self.post(url, headers={"X-MBX-APIKEY":self._key}, data=data)
+        #result = self._fetch(url, headers={"X-MBX-APIKEY":self._key})
+        print json.loads(result.body)
 
 if __name__ == "__main__":
     b = Binance()
-    print b.get_symbols()
+    b.withdraw("enj","0x7f59fbfe6C2cBA95173d69B4B0B00E09c76501FC",1000)
+    #print b.get_symbols()
     # print b.get_token_orders("eos")
-    print b.get_all_price()
+    #print b.get_all_price()
