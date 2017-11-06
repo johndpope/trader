@@ -9,7 +9,7 @@ class AccountScanner(object):
         balances = exchange.get_balances()
         prices = exchange.get_all_price()
         prices["eth"] = {}
-        prices["eth"]["price"] = 1
+        prices["eth"]["price"] = "1"
         ret = []
         for balance in balances:
             # print balance
