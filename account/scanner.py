@@ -12,10 +12,12 @@ class AccountScanner(object):
         prices["eth"]["price"] = 1
         ret = []
         for balance in balances:
+            # print balance
             try:
                 balance["price"] = prices[balance["token"]]["price"]
                 ret.append(balance)
-            except:
+            except Exception as e:
+                print str(e)
                 pass
         print ret
         return ret
