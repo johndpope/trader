@@ -15,6 +15,8 @@ class Trade(object):
         # if not self.check_enough_token(bid.exchange, token, amount):
             # return
         amount = self.get_smallest_amount(token, ask.exchange, ask.price, bid.exchange, amount)
+        print ask.exchange, token, "buy", ask.price, amount
+        print bid.exchange, token,"sell", bid.price, amount
         my_bid_exchange.order(token,"buy", ask.price, amount)
         my_ask_exchange.order(token,"sell", bid.price, amount)
 
