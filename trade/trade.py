@@ -1,8 +1,8 @@
 from libs.utils import create_exchange
 from account.models import exchange_tokens
 class Trade(object):
-    @staticmethod
-    def arrange_order(token,ask, bid, amount):
+    # @staticmethod
+    def arrange_order(self,token,ask, bid, amount):
         # print ask, bid
         # print "eeeeee"
         my_bid_exchange = create_exchange(ask.exchange)
@@ -26,8 +26,8 @@ class Trade(object):
         bid_amount = exchange_tokens.get_exchange_token_amount(token, bid_exchange)
         return min([ask_amount, bid_amount, amount])
         # pass
-    @classmethod
-    def order(cls,token,pairs):
+    # @classmethod
+    def order(self,token,pairs):
         for pair in pairs:
             profit = pair["profit"]
             if profit <1:
@@ -36,7 +36,7 @@ class Trade(object):
             bid = pair["bid"]
             amount = pair["amount"]
             # print profit, ask.price,ask.amount, ask.exchange, ask.type, bid.price, bid.amount, bid.exchange,bid.type, amount
-            cls.arrange_order(token,ask, bid, amount)
+            self.arrange_order(token,ask, bid, amount)
             break
 
         # bid_queue = token_item["depth"]
