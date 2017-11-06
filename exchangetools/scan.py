@@ -11,13 +11,8 @@ def get_profit_tokens_and_report():
     items = []
     for token in tokens:
         try:
-            exchanges = []
-            if token in HITBTC_TOKENS:
-                exchanges.append("hitbtc")
-            if token in LIQUI_TOKENS:
-                exchanges.append("liqui")
-            if token in BINANCE_TOKENS:
-                exchanges.append("binance")
+            exchanges = exchange_tokens.get_token_exchanges(token)
+            
             # print token
             if len(exchanges) <2:
                 continue

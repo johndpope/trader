@@ -82,6 +82,15 @@ class ExchangeTokens(object):
             return []
         return [ item["token"] for item in data ]
 
+    def get_token_exchanges(self, token):
+        with aquire_cursor() as cursor:
+            stmt = "SELECT DISTINCT token from token_record where token='{token}'".format(token=token)
+            cursor.execute(stmt)
+            data = cursor.fetchall()
+        if not data:
+            return []
+        return [ item["exchange"] for item in data ]
+
 class TranscationRecords(object):
     def __init__(self):
         pass

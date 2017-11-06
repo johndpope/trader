@@ -6,15 +6,18 @@ from trade.trade import auto_trader
 
 def get_profit_tokens_and_report():
     # tokens = TOKENS
-    tokens = set(HITBTC_TOKENS) | set(LIQUI_TOKENS) | set(BITTREX_TOKENS)
+    # tokens = set(HITBTC_TOKENS) | set(LIQUI_TOKENS) | set(BITTREX_TOKENS)
+    tokens = exchange_tokens.get_tokens()
     items = []
     for token in tokens:
         try:
-            exchanges = []
-            if token in HITBTC_TOKENS:
-                exchanges.append("hitbtc")
-            if token in LIQUI_TOKENS:
-                exchanges.append("liqui")
+            # exchanges = []
+            exchanges = exchange_tokens.get_token_exchanges(token)
+
+            # if token in HITBTC_TOKENS:
+                # exchanges.append("hitbtc")
+            # if token in LIQUI_TOKENS:
+                # exchanges.append("liqui")
             #if token in BITTREX_TOKENS:
             #    exchanges.append("bittrex")
             # print token
