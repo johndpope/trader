@@ -23,3 +23,6 @@ def create_exchange(exchange):
     if exchange == "bitstamp":
         from exchanges.bitstamp import Bitstamp
         return Bitstamp()
+    if exchange == "huobi":
+        from exchanges.huobi import Huobi
+        return Huobi()
