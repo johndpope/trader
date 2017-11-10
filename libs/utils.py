@@ -29,3 +29,6 @@ def create_exchange(exchange):
     if exchange == "wex":
         from exchanges.wex import Wex
         return Wex()
+    if exchange == "yobit":
+        from exchanges.yobit import Yobit
+        return Yobit()
