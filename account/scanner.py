@@ -39,7 +39,8 @@ class AccountScanner(object):
                 self._exchange_tokens.save_token_record(balance)
     def scan_all_exchanges(self):
         ret = {}
-        for exchange in ["binance","hitbtc","liqui","bithumb","bitfinex", "poloniex"]:
+        for exchange in ["binance","hitbtc","liqui","bithumb","bitfinex", "poloniex",
+        "bitstamp"]:
             try:
                 exchange_tokens = self.scan_simple_tokens(exchange)
                 local_tokens = self._exchange_tokens.get_simple_tokens(exchange)

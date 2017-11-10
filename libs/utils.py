@@ -20,3 +20,6 @@ def create_exchange(exchange):
     if exchange == "poloniex":
         from exchanges.poloniex import Poloniex
         return Poloniex()
+    if exchange == "bitstamp":
+        from exchanges.bitstamp import Bitstamp
+        return Bitstamp()
