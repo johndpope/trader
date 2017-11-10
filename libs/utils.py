@@ -14,3 +14,6 @@ def create_exchange(exchange):
     if exchange == "bithumb":
         from exchanges.bithumb import Bithumb
         return Bithumb()
+    if exchange == "bitfinex":
+        from exchanges.bitfinex import Bitfinex
+        return Bitfinex()

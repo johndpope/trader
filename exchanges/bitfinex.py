@@ -14,7 +14,7 @@ class Bitfinex(Exchange):
         url = self._prefix  + "/v1/symbols"
         symbols = [ item for item in json.loads(self._fetch(url)) ]
         raw_items = filter(lambda x:x.endswith("eth"), symbols)
-        return [ item[:-4].lower() for item in raw_items ]
+        return [ item[:-3].lower() for item in raw_items ]
 
 
 if __name__ == "__main__":
