@@ -40,22 +40,25 @@ class AccountScanner(object):
     def scan_all_exchanges(self):
         ret = {}
         for exchange in ["binance","hitbtc","liqui","bithumb","bitfinex"]:
-            exchange_tokens = self.scan_simple_tokens(exchange)
-            local_tokens = self._exchange_tokens.get_simple_tokens(exchange)
-            #local_tokens = []
-            ret[exchange] = []
-            token_records = []
-            for token in exchange_tokens:
-                if token not in local_tokens:
-                    ret[exchange].append(token)
-                    item = {}
-                    item["token"] = token
-                    item["exchange"] = exchange
-                    item["identify"] = exchange + "_" + token
-                    try:
-                        self._exchange_tokens.save_sample_token(item)
-                    except:
-                        pass
+            try:
+                exchange_tokens = self.scan_simple_tokens(exchange)
+                local_tokens = self._exchange_tokens.get_simple_tokens(exchange)
+                #local_tokens = []
+                ret[exchange] = []
+                token_records = []
+                for token in exchange_tokens:
+                    if token not in local_tokens:
+                        ret[exchange].append(token)
+                        item = {}
+                        item["token"] = token
+                        item["exchange"] = exchange
+                        item["identify"] = exchange + "_" + token
+                        try:
+                            self._exchange_tokens.save_sample_token(item)
+                        except:
+                            pass
+            except:
+                pass
         print ret
         return ret
 

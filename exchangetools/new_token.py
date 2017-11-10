@@ -8,7 +8,7 @@ def main():
         for exchange, tokens in new_tokens.items():
             if tokens:
                 report_token(exchange, tokens)
-        time.sleep(1)
+        time.sleep(4)
         # for token_pair in token_pairs:
         #     balance._balance_between_account(token_pair["from"], token_pair["to"], token_pair["amount"])
 
