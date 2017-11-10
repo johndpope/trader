@@ -35,7 +35,8 @@ def report_balance(items):
 def report_token(exchange, tokens):
     report_text = "Exchange:" + exchange + "\n____________________"
     for token in tokens:
-        report_text += "\n" + token
+        report_text += "\n" + token["token"]
+        report_text += "\n---------------\nList in such exchanges:" + " ".join(token["exchanges"])
     telegram_bot.sendmsg(-1001205170565, report_text)
 if __name__ == "__main__":
     report("x")

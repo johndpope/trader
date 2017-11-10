@@ -52,6 +52,14 @@ class ExchangeTokens(object):
         if not data:
             return []
         return [ item["token"] for item in data ]
+    def get_simple_token_exchanges(self, token):
+        with aquire_cursor() as cursor:
+            stmt = "select exchange from simple_token where token='{token}'".format(token=token)
+            cursor.execute(stmt)
+            data = cursor.fetchall()
+        if not data:
+            return []
+        return [ item["exchange"] for item in data ]
 
     def save_sample_token(self, token_record):
         identify = token_record["identify"]
