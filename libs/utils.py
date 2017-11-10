@@ -26,3 +26,6 @@ def create_exchange(exchange):
     if exchange == "huobi":
         from exchanges.huobi import Huobi
         return Huobi()
+    if exchange == "wex":
+        from exchanges.wex import Wex
+        return Wex()

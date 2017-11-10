@@ -6,20 +6,20 @@ import time
 from exchanges.common import Exchange
 
 
-class Poloniex(Exchange):
+class Wex(Exchange):
     def __init__(self):
-        self._prefix = "https://poloniex.com"
+        self._prefix = "https://wex.nz"
 
     def get_symbols(self):
-        url = self._prefix  + "/public?command=returnCurrencies"
-        symbols = [ item.lower() for item in json.loads(self._fetch(url)) ]
-        #raw_items = filter(lambda x:x.endswith("eth"), symbols)
-        #return [ item[:-3].lower() for item in raw_items ]
-        return symbols
+        url = self._prefix  + "/api/3/info"
+        symbols = [ item.lower() for item in json.loads(self._fetch(url))["pairs"] ]
+        raw_items = filter(lambda x:x.endswith("eth"), symbols)
+        return [ item[:-4].lower() for item in raw_items ]
+        # return symbols
 
 
 if __name__ == "__main__":
-    b = Poloniex()
+    b = Wex()
     # b.withdraw("enj","0x7f59fbfe6C2cBA95173d69B4B0B00E09c76501FC",1000)
     # b.order("enj","buy","0.00005","1000")
     print b.get_symbols()
