@@ -31,5 +31,11 @@ def report_balance(items):
 
     report_text +="------------------\nTotal value in eth:{total_value}\n".format(total_value=total_value)
     telegram_bot.sendmsg(-1001205170565, report_text)
+
+def report_token(exchange, tokens):
+    report_text = "Exchange:" + exchange 
+    for token in tokens:
+        report_text += "\n" + token
+    telegram_bot.sendmsg(-1001205170565, report_text)
 if __name__ == "__main__":
     report("x")

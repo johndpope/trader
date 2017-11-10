@@ -44,6 +44,23 @@ class ExchangeTokens(object):
             return []
         return data
 
+    def get_simple_tokens(self, exchange):
+        with aquire_cursor() as cursor:
+            stmt = "select token from simple_token where exchange='{exchange}'".format(exchange=exchange)
+            cursor.execute(stmt)
+            data = cursor.fetchall()
+        if not data:
+            return []
+        return [ item["token"] for item in data ]
+
+    def save_sample_token(self, token_record):
+        identify = token_record["identify"]
+        token = token_record["token"]
+        exchange = token_record["exchange"]
+        with aquire_cursor() as cursor:
+            stmt  = "INSERT INTO simple_token (identify,token, exchange) VALUES ('{identify}','{token}', '{exchange}')".format(identify=identify,token=token,exchange=exchange)
+            cursor.execute(stmt)
+
     def get_balances(self):
         with aquire_cursor() as cursor:
             stmt = "select * from token_record"
