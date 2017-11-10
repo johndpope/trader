@@ -12,7 +12,7 @@ class Poloniex(Exchange):
 
     def get_symbols(self):
         url = self._prefix  + "/public?command=returnCurrencies"
-        symbols = [ item for item in json.loads(self._fetch(url)) ]
+        symbols = [ item.lower() for item in json.loads(self._fetch(url)) ]
         #raw_items = filter(lambda x:x.endswith("eth"), symbols)
         #return [ item[:-3].lower() for item in raw_items ]
         return symbols
