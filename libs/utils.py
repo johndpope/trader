@@ -17,3 +17,6 @@ def create_exchange(exchange):
     if exchange == "bitfinex":
         from exchanges.bitfinex import Bitfinex
         return Bitfinex()
+    if exchange == "poloniex":
+        from exchanges.poloniex import Poloniex
+        return Poloniex()
