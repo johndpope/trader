@@ -13,8 +13,8 @@ class Wex(Exchange):
     def get_symbols(self):
         url = self._prefix  + "/api/3/info"
         symbols = [ item.lower() for item in json.loads(self._fetch(url))["pairs"] ]
-        raw_items = filter(lambda x:x.endswith("eth"), symbols)
-        return [ item[:-4].lower() for item in raw_items ]
+        # raw_items = filter(lambda x:x.endswith("eth"), symbols)
+        return [ item[:-4].lower() for item in symbols ]
         # return symbols
 
 
