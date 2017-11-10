@@ -11,3 +11,6 @@ def create_exchange(exchange):
     if exchange == "binance":
         from exchanges.binance import Binance
         return Binance()
+    if exchange == "bithumb":
+        from exchanges.bithumb import Bithumb
+        return Bithumb()

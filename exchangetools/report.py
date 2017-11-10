@@ -33,7 +33,7 @@ def report_balance(items):
     telegram_bot.sendmsg(-1001205170565, report_text)
 
 def report_token(exchange, tokens):
-    report_text = "Exchange:" + exchange 
+    report_text = "Exchange:" + exchange + "\n____________________"
     for token in tokens:
         report_text += "\n" + token
     telegram_bot.sendmsg(-1001205170565, report_text)
