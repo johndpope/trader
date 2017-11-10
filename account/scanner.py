@@ -19,8 +19,12 @@ class AccountScanner(object):
             except Exception as e:
                 print str(e)
                 pass
-        print ret
         return ret
+
+    def scan_simple_tokens(self, exchange):
+        exchange = create_exchange(exchange)
+        symbols = exchange.get_symbols()
+        return symbols
 
 
     def scan_local_balance(self, exchange):
@@ -33,6 +37,27 @@ class AccountScanner(object):
             # local_balances = self.scan_local_balance(exchange)
             for balance in balances:
                 self._exchange_tokens.save_token_record(balance)
+    def scan_all_exchanges(self):
+        ret = {}
+        for exchange in ["binance","hitbtc","liqui"]:
+            exchange_tokens = self.scan_simple_tokens(exchange)
+            local_tokens = self._exchange_tokens.get_simple_tokens(exchange)
+            #local_tokens = []
+            ret[exchange] = []
+            token_records = []
+            for token in exchange_tokens:
+                if token not in local_tokens:
+                    ret[exchange].append(token)
+                    item = {}
+                    item["token"] = token
+                    item["exchange"] = exchange
+                    item["identify"] = exchange + "_" + token
+                    try:
+                        self._exchange_tokens.save_sample_token(item)
+                    except:
+                        pass
+        print ret
+        return ret
 
     def get_transfer_token_pairs(self):
         tokens = self._exchange_tokens.get_tokens()

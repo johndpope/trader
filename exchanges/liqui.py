@@ -75,12 +75,15 @@ class Liqui(Exchange):
             print data["error"]
         balances = data.get('return', data)
         ret = []
-        for token, amount in balances["funds"].items():
-            item = {}
-            item["token"] = token.lower()
-            item["amount"] = amount
-            item["exchange"] = "liqui"
-            ret.append(item)
+        try:
+            for token, amount in balances["funds"].items():
+                item = {}
+                item["token"] = token.lower()
+                item["amount"] = amount
+                item["exchange"] = "liqui"
+                ret.append(item)
+        except:
+            pass
         return ret
 
     def get_all_price(self):

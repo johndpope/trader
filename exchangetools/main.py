@@ -33,8 +33,8 @@ def get_profit_tokens_and_report():
             print token, exchanges
             if item["profit"] > 1:
                 print "__________import__________"
-                # print item
-                # report_with_depth(item)
+                #print item
+                #report_with_depth(item)
                 auto_trader.order(token,item["auto_order"])
 
         except Exception as e:
