@@ -5,10 +5,10 @@ class Tokens(object):
 
     def get_token_timeline(self, token):
         with aquire_cursor() as cursor:
-            stmt = "select exchange from simple_token where token='{token}'".format(token=token)
+            stmt = "select * from simple_token where token='{token}'".format(token=token)
             cursor.execute(stmt)
             data = cursor.fetchall()
-        self.as_timeline(data)
+        return self.as_timeline(data)
 
     @staticmethod
     def as_timeline(items):
@@ -21,4 +21,4 @@ class Tokens(object):
         return ret
 if __name__ == "__main__":
     t = Tokens()
-    t.get_token_timeline("rdn")
+    print t.get_token_timeline("rdn")
