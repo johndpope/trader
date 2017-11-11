@@ -23,3 +23,6 @@ class Tokens(object):
             d["create_time"] = str(item["create_time"])
             ret.append(d)
         return ret
+if __name__ == "__main__":
+    t = Tokens()
+    t.get_token_timeline("rdn")
