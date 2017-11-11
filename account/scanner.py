@@ -52,7 +52,7 @@ class AccountScanner(object):
                         r = {}
                         r["token"] = token
                         r["exchanges"] = self._exchange_tokens.get_simple_token_exchanges(token)
-                        ret[exchange].append(token)
+                        ret[exchange].append(r)
                         item = {}
                         item["token"] = token
                         item["exchange"] = exchange
