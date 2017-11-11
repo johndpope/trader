@@ -29,7 +29,7 @@ class TokenTimeLineHandler(tornado.web.RequestHandler):
         token = self.get_argument("token","knc")
         ret = token_model.get_token_timeline(token)
         # today = date.today()
-        self.finish(ret)
+        self.finish(json.dumps(ret))
 
 def make_app():
     return tornado.web.Application([
