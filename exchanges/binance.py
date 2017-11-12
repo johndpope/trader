@@ -6,6 +6,7 @@ import time
 # import requests
 from exchanges.common import Exchange
 from settings.account import BINANCE
+from libs.utils import timestamp_to_string
 try:
     from urllib.parse import urlencode
 except ImportError:
@@ -29,6 +30,27 @@ class Binance(Exchange):
         symbols = [ item["symbol"] for item in json.loads(self._fetch(url)) ]
         raw_items = filter(lambda x:x.endswith("ETH"), symbols)
         return [ item[:-3].lower() for item in raw_items ]
+    
+    def get_kline(self,token):
+        url = self._prefix + "/api/v1/klines?symbol=" + token.upper() + "ETH&interval=5m"
+        return self._parser_kline(json.loads(self._fetch(url)))
+
+    def _parser_kline(self, items):
+        ret = []
+        for item in items:
+            i = {}
+            i["open_time"] = timestamp_to_string(int(item[0])/1000)
+            i["close_time"] = timestamp_to_string(int(item[6])/1000)
+            i["open"] = item[1]
+            i["close"] = item[4]
+            i["volume"] = item[5]
+            i["eth_volume"] = item[7]
+            i["num_trades"] = item[8]
+            i["buy_volume"] = item[9]
+            i["buy_eth_volume"] = item[10]
+            print i
+            ret.append(i)
+        return ret 
 
     def get_token_orders(self, token):
         url = self._prefix + '/api/v1/depth?symbol=' + token.upper() + "ETH"
@@ -140,7 +162,8 @@ class Binance(Exchange):
 if __name__ == "__main__":
     b = Binance()
     # b.withdraw("enj","0x7f59fbfe6C2cBA95173d69B4B0B00E09c76501FC",1000)
-    b.order("enj","buy","0.00005","1000")
+    #b.order("enj","buy","0.00005","1000")
+    b.get_kline("knc")
     #print b.get_symbols()
     # print b.get_token_orders("eos")
     #print b.get_all_price()

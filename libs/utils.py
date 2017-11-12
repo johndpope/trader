@@ -1,3 +1,4 @@
+import datetime
 def create_exchange(exchange):
     if exchange == "liqui":
         from exchanges.liqui import Liqui
@@ -32,3 +33,7 @@ def create_exchange(exchange):
     if exchange == "yobit":
         from exchanges.yobit import Yobit
         return Yobit()
+def timestamp_to_string(timestamp):
+    tmp = datetime.datetime.fromtimestamp(int(timestamp))
+    str1 = tmp.strftime("%Y-%m-%d %H:%M:%S.%f")
+    return str1
