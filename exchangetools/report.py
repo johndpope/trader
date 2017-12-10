@@ -38,5 +38,11 @@ def report_token(exchange, tokens):
         report_text += "\n" + token["token"]
         report_text += "\n---------------\nList in such exchanges:" + " ".join(token["exchanges"])
     telegram_bot.sendmsg(-1001205170565, report_text)
+def report_pull(item):
+    report_text = ""
+    for token in item:
+        report_text += "Token:" + token["token"] + " Eth_volume:" + str(token["eth_volume"]) + " Price:" + str(token["close"]) + " Trades: " + str(token["num_trades"]) + " Buy_eth_volume: " + str(token["buy_eth_volume"]) + "\n"
+    if report_text:
+        telegram_bot.sendmsg(-1001378795724, report_text)
 if __name__ == "__main__":
     report("x")

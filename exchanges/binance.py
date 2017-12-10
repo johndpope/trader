@@ -32,15 +32,17 @@ class Binance(Exchange):
         return [ item[:-3].lower() for item in raw_items ]
     
     def get_kline(self,token):
-        url = self._prefix + "/api/v1/klines?symbol=" + token.upper() + "ETH&interval=5m"
-        return self._parser_kline(json.loads(self._fetch(url)))
+        url = self._prefix + "/api/v1/klines?symbol=" + token.upper() + "ETH&interval=5m&limit=2"
+        return self._parser_kline(json.loads(self._fetch(url)),token)
 
-    def _parser_kline(self, items):
+    def _parser_kline(self, items, token):
         ret = []
         for item in items:
             i = {}
-            i["open_time"] = timestamp_to_string(int(item[0])/1000)
-            i["close_time"] = timestamp_to_string(int(item[6])/1000)
+            i["token"] = token
+            i["exchange"] = "binance"
+            i["open_time"] = int(item[0])/1000
+            i["close_time"] =int(item[6])/1000
             i["open"] = item[1]
             i["close"] = item[4]
             i["volume"] = item[5]
@@ -48,7 +50,7 @@ class Binance(Exchange):
             i["num_trades"] = item[8]
             i["buy_volume"] = item[9]
             i["buy_eth_volume"] = item[10]
-            print i
+            i["interval"] = "5m"
             ret.append(i)
         return ret 
 

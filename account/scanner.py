@@ -1,6 +1,7 @@
 from libs.utils import create_exchange
 from account.models import exchange_tokens
 from transaction.balance import transaction_balance
+from account.virtual import vir
 class AccountScanner(object):
     def __init__(self):
         self._exchange_tokens = exchange_tokens
@@ -37,10 +38,21 @@ class AccountScanner(object):
             # local_balances = self.scan_local_balance(exchange)
             for balance in balances:
                 self._exchange_tokens.save_token_record(balance)
+
+    def scan_k_line(self):
+        for exchange in ["binance"]:
+            tokens = self._exchange_tokens.get_simple_tokens(exchange)
+            exchange = create_exchange(exchange)
+            for token in tokens:
+                klines = exchange.get_kline(token)
+                #for point in klines:
+                point = klines[0]
+                vir.save_k_point(point)
+
     def scan_all_exchanges(self):
         ret = {}
         for exchange in ["binance","hitbtc","liqui","bithumb","bitfinex", "poloniex",
-        "bitstamp","huobi","wex","yobit"]:
+        "bitstamp","huobi","wex","yobit","bittrex"]:
             try:
                 exchange_tokens = self.scan_simple_tokens(exchange)
                 local_tokens = self._exchange_tokens.get_simple_tokens(exchange)
@@ -87,3 +99,4 @@ class AccountScanner(object):
         return pairs
 
 account_scanner = AccountScanner()
+account_scanner.scan_k_line()

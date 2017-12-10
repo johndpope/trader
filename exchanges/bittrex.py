@@ -91,5 +91,5 @@ class Bittrex(Exchange):
 
 if __name__ == "__main__":
     b = Bittrex()
-    # print b.get_symbols()
-    b.get_balance()
+    print b.get_symbols()
+    #b.get_balance()

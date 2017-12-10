@@ -1,4 +1,5 @@
 import datetime
+import time
 def create_exchange(exchange):
     if exchange == "liqui":
         from exchanges.liqui import Liqui
@@ -37,3 +38,9 @@ def timestamp_to_string(timestamp):
     tmp = datetime.datetime.fromtimestamp(int(timestamp))
     str1 = tmp.strftime("%Y-%m-%d %H:%M:%S.%f")
     return str1
+def timestamp_to_mysql_string(timestamp):
+    return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+
+def mysql_string_to_timestamp(mysql_string):
+    mysql_string = datetime.datetime.strptime(mysql_string, "%Y-%m-%d %H:%M:%S")
+    return int(time.mktime(mysql_string.timetuple()))
